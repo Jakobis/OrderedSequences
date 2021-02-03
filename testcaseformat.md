@@ -5,8 +5,10 @@ This documents contains the format definition for Test Case input and output
 
 Input may not be malformed.
 
+.in files starts with number of lines *n*
+
 | Operation       | Input        | Input Example | Output            |
-|-----------------|:-------------|:-------------:|:-----------------:|
+|:----------------|:-------------|:-------------:|:-----------------:|
 | Add value       | a and 1 int  | `a 2`         | None              |
 | Delete by index | d and 1 int  | `d 15`        | None              |
 | Remove by value | re and 1 int | `re 161`      | None              |

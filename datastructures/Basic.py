@@ -1,13 +1,11 @@
 from datastructures.Template import Template
 
-class A(Template):
+class Basic(Template):
     def __init__(self):
         self.li = []
-    def insert(self, element):
-        for i, item in enumerate(self.li):
-            if item > element:
-                self.li.insert(i, element)
-                break
+    def add(self, element):
+        self.li.append(element)
+        self.li.sort()
     def delete(self, index):
         self.li.pop(index)
     def remove(self, element):
