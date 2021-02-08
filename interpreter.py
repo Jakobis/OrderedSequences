@@ -18,7 +18,7 @@ def interpret(test, sequence):
             write(sequence.rank(sequence, int(parts[1])))
         elif parts[0] == "s":
             write(sequence.select(sequence, int(parts[1])))
-        elif parts[0] == "sf":
+        elif parts[0] == "sum":
             write(sum(sequence.iter(sequence)))
         elif parts[0] == "su":
             write(sequence.successor(sequence, int(parts[1])))
