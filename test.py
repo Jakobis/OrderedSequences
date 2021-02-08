@@ -19,6 +19,6 @@ print(structures)
 for ds in structures:
     instance = get_class(ds)
     for test in testFiles:
-        file = open(f'tests/{test}.in', 'r')
-        lines = file.readlines()
-        interpret(lines, instance)
+        res = interpret(test, instance)
+        if not res:
+            print(f'{ds} did not give correct output')
