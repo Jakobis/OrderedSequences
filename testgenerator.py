@@ -51,6 +51,3 @@ for i in range(n):
 
     elif op == "sumforward":
         print(f"sf")
-
-    elif op == "sumreversed":
-        print(f"sr")
