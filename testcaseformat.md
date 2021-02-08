@@ -15,4 +15,4 @@ Input may not be malformed.
 | Rank by value   | r and 1 int  | `r 41`        | Rank of value     |
 | Select by index | s and 1 int  | `s 61`        | Value at index    |
 | Sum Forwards    | sf           | `sf`          | Sum of all values |
-| Sum Reversed    | sr           | `sr`          | Sum of all values |
+| Successor       | sr           | `sr`          | Sum of all values |
