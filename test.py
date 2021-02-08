@@ -15,10 +15,10 @@ def get_class( name ):
     m.__init__(m)
     return m
 
-print(structures)
+print(f"Testing following structures: {structures}")
 for ds in structures:
     instance = get_class(ds)
     for test in testFiles:
         res = interpret(test, instance)
         if not res:
-            print(f'{ds} did not give correct output')
+            print(f'{ds} did not give correct output for test "{test}.in"')
