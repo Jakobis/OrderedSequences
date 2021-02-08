@@ -17,8 +17,8 @@ def get_class( name ):
 
 print(f"Testing following structures: {structures}")
 for ds in structures:
-    instance = get_class(ds)
     for test in testFiles:
+        instance = get_class(ds)
         res = interpret(test, instance)
         if not res:
             print(f'{ds} did not give correct output for test "{test}.in"')

@@ -30,5 +30,5 @@ def interpret(test, sequence):
         outFile = open(outName, 'r')
         answerFile = open(f'tests/{test}.out', 'r')
         outFile.close()
-    #os.remove(outName)
+    os.remove(outName)
     return res

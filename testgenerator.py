@@ -47,20 +47,28 @@ for i in range(n):
         index = random.randint(0, len(current_list) - 1)
         value = current_list[index]
         infile.write(f"r {value}\n")
+        outfile.write(f"{index}\n")
 
     elif op == "select":
         index = random.randint(0, len(current_list) - 1)
         infile.write(f"s {index}\n")
+        outfile.write(f"{current_list[index]}\n")
 
     elif op == "sum":
         infile.write(f"sum\n")
+        outfile.write(f"{sum(current_list)}\n")
 
     elif op == "successor":
         index = random.randint(0, len(current_list) - 2)
         value = current_list[index]
         infile.write(f"su {value}\n")
+        outfile.write(f"{current_list[index + 1]}\n")
 
     elif op == "predecessor":
         index = random.randint(1, len(current_list) - 1)
         value = current_list[index]
         infile.write(f"pr {value}\n")
+        outfile.write(f"{current_list[index - 1]}\n")
+
+infile.close()
+outfile.close()
