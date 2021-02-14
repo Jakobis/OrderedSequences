@@ -21,3 +21,5 @@ class Template:
         pass
     def predecessor(self, value):
         pass
+    def size(self):
+        pass

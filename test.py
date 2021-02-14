@@ -3,6 +3,7 @@ import datastructures
 from interpreter import interpret
 from os import listdir
 from os.path import isfile, join
+import sys
 testFiles = [f[:-3] for f in listdir("tests") if isfile(join("tests", f)) and f.endswith(".in")]
 
 def get_class( name ):
@@ -15,10 +16,20 @@ def get_class( name ):
     m.__init__(m)
     return m
 
+benchmarkinterval = 9999999
+if len(sys.argv) > 1:
+    benchmarkinterval = int(sys.argv[1])
+
 print(f"Testing following structures: {structures}")
 for ds in structures:
     for test in testFiles:
         instance = get_class(ds)
-        res = interpret(test, instance)
+        benches = {}
+        res = interpret(test, instance, benches)
         if not res:
             print(f'{ds} did not give correct output for test "{test}.in"')
+        else:
+            outName = f"{ds}.{test}.timings"
+            outFile = open(outName, 'w')
+            outFile.write(str(benches))
+            outFile.close()

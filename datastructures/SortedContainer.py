@@ -35,3 +35,6 @@ class SortedContainer(Template):
 
     def predecessor(self, value):
         return self.select(self, self.rank(self, value) - 1)
+
+    def size(self):
+        return len(self.li)
