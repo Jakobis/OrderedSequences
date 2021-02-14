@@ -17,3 +17,7 @@ class Template:
         pass
     def count(self, value):
         pass
+    def successor(self, value):
+        pass
+    def predecessor(self, value):
+        pass

@@ -2,7 +2,7 @@ import filecmp, os
 
 def interpret(test, sequence):
     inFile = open(f'tests/{test}.in', 'r')
-    outName = ".testoutput"
+    outName = f"{sequence.__name__}.{test}.testoutput"
     outFile = open(outName, 'w')
     write = lambda x: outFile.write(f'{x}\n')
     lines = inFile.readlines()
@@ -10,24 +10,25 @@ def interpret(test, sequence):
         parts = line.split()
         if parts[0] == "a":
             sequence.add(sequence, int(parts[1]))
-        if parts[0] == "d":
+        elif parts[0] == "d":
             sequence.delete(sequence, int(parts[1]))
-        if parts[0] == "re":
+        elif parts[0] == "re":
             sequence.remove(sequence, int(parts[1]))
-        if parts[0] == "r":
+        elif parts[0] == "r":
             write(sequence.rank(sequence, int(parts[1])))
-        if parts[0] == "s":
+        elif parts[0] == "s":
             write(sequence.select(sequence, int(parts[1])))
-        if parts[0] == "sf":
+        elif parts[0] == "sum":
             write(sum(sequence.iter(sequence)))
-        if parts[0] == "sr":
-            write(sum(sequence.reversed(sequence)))
+        elif parts[0] == "su":
+            write(sequence.successor(sequence, int(parts[1])))
+        elif parts[0] == "pr":
+            write(sequence.predecessor(sequence, int(parts[1])))
     outFile.close()
     res = filecmp.cmp(f'tests/{test}.out', outName)
     if not res:
         outFile = open(outName, 'r')
         answerFile = open(f'tests/{test}.out', 'r')
-        print(outFile.readlines())
-        print(answerFile.readlines())
+        outFile.close()
     os.remove(outName)
     return res

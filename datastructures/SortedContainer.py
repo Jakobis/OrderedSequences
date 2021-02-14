@@ -29,3 +29,9 @@ class SortedContainer(Template):
 
     def count(self, value):
         return self.li.count(value)
+
+    def successor(self, value):
+        return self.select(self, self.rank(self, value) + 1)
+
+    def predecessor(self, value):
+        return self.select(self, self.rank(self, value) - 1)
