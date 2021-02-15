@@ -24,10 +24,10 @@ def compareanswers(answerfilename, resultfilename, structure):
         print(answer)
     else:
         for i, (r, a) in enumerate(zip(result, answer)):
-            if r != a:
+            if r.strip() != a.strip():
                 equal = False
                 if not printedonce:
-                    print(f"{structure} failed on {answerfile.name}.\nWas {len(result)}, expected {len(answer)} on line {i}")
+                    print(f"{structure} failed on {answerfile.name}.\nWas {r.strip()}, expected {a.strip()} on line {i}")
                     printedonce = True
     resultfile.close()
     answerfile.close()
