@@ -3,6 +3,7 @@
 
 __pycache__/
 *.testoutput
+*.timings
 
 # User-specific stuff
 .idea/**/workspace.xml
