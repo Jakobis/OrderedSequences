@@ -10,6 +10,29 @@ def preparebenches(benches):
     benches['su'] = []
     benches['pr'] = []
 
+def compareanswers(answerfilename, resultfilename, structure):
+    resultfile = open(resultfilename, 'r')
+    answerfile = open(answerfilename, 'r')
+    result = resultfile.readlines()
+    answer = answerfile.readlines()
+    printedonce = False
+    equal = True
+    if len(result) != len(answer):
+        print(f"{structure} failed on {answerfile.name} with a difference in length.\nWas {len(result)}, expected {len(answer)}")
+        equal = False
+        print(result)
+        print(answer)
+    else:
+        for i, (r, a) in enumerate(zip(result, answer)):
+            if r != a:
+                equal = False
+                if not printedonce:
+                    print(f"{structure} failed on {answerfile.name}.\nWas {len(result)}, expected {len(answer)} on line {i}")
+                    printedonce = True
+    resultfile.close()
+    answerfile.close()
+    return equal
+
 def interpret(test, sequence, benches = {}, testinterval = 999999999):
     preparebenches(benches)
     inFile = open(f'tests/{test}.in', 'r')
@@ -47,10 +70,7 @@ def interpret(test, sequence, benches = {}, testinterval = 999999999):
         count += 1
 
     outFile.close()
-    res = filecmp.cmp(f'tests/{test}.out', outName)
-    if not res:
-        outFile = open(outName, 'r')
-        answerFile = open(f'tests/{test}.out', 'r') # I think we have something wonk here
-        outFile.close()
-    os.remove(outName)
+    res = compareanswers(f'tests/{test}.out', outName, sequence.__name__)
+    if res:
+        os.remove(outName)
     return res

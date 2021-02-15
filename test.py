@@ -27,7 +27,7 @@ for ds in structures:
         benches = {}
         res = interpret(test, instance, benches)
         if not res:
-            print(f'{ds} did not give correct output for test "{test}.in"')
+            print(f'{ds} did not give correct output for test "{test}.in"\n')
         else:
             outName = f"{ds}.{test}.timings"
             outFile = open(outName, 'w')
