@@ -36,7 +36,8 @@ def compareanswers(answerfilename, resultfilename, structure):
 def interpret(test, sequence, benches = {}, testinterval = 999999999):
     preparebenches(benches)
     inFile = open(f'tests/{test}.in', 'r')
-    outName = f"{sequence.__name__}.{test}.testoutput"
+    outName = f"output/{sequence.__name__}.{test}.testoutput"
+    os.makedirs(os.path.dirname(outName), exist_ok=True)
     outFile = open(outName, 'w')
     write = lambda x: outFile.write(f'{x}\n')
     lines = inFile.readlines()

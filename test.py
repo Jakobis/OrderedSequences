@@ -1,8 +1,8 @@
 from datastructures import structures
 import datastructures
 from interpreter import interpret
-from os import listdir
-from os.path import isfile, join
+from os import listdir, makedirs
+from os.path import isfile, join, dirname
 import sys
 testFiles = [f[:-3] for f in listdir("tests") if isfile(join("tests", f)) and f.endswith(".in")]
 
@@ -29,7 +29,8 @@ for ds in structures:
         if not res:
             print(f'{ds} did not give correct output for test "{test}.in"\n')
         else:
-            outName = f"{ds}.{test}.timings"
+            outName = f"timings/{ds}.{test}.timings"
+            makedirs(dirname(outName), exist_ok=True)
             outFile = open(outName, 'w')
             outFile.write(str(benches))
             outFile.close()
