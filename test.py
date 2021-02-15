@@ -26,7 +26,7 @@ for ds in structures:
     for test in testFiles:
         instance = get_class(ds)
         benches = {}
-        res = interpret(test, instance, benches)
+        res = interpret(test, instance, benches, benchmarkinterval)
         if not res:
             print(f'{ds} did not give correct output for test "{test}.in"\n')
             testfailed += 1
