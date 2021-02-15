@@ -17,8 +17,8 @@ class RBSTree(Template):
         return iter(self.li.Keys())
     def reversed(self):
         return reversed(self.li.Keys())
-    def count(self, value):
-        pass
+    def count(self, element):
+        return self.li.get(element)
     def successor(self, value):
         pass
     def predecessor(self, value):
@@ -90,6 +90,18 @@ class RedBlackBST:
                 x = x.right
             else:
                 x = x.left
+        raise ValueError("No such value")
+
+    def _getList(self, x, key):
+        l = [x]
+        while x is not None:
+            if x.key == key:
+                return l
+            elif x.key < key:
+                x = x.right
+            else:
+                x = x.left
+            l.append(x)
         raise ValueError("No such value")
 
     def contains(self, key):
@@ -379,10 +391,21 @@ class RedBlackBST:
     def successor(self, element):
         if element is None:
             raise ValueError("argument is null")
-        node = self._get(self.root, element)
+        nodeList = self._getList(self.root, element)
+        node = nodeList[-1]
         if node.right is not None:
             return node.right.key
-        #todo end this method, needs a get method that returns the branch
+        p = len(nodeList) - 2
+        oldNode = node
+        while p > 0:
+            node = nodeList[p]
+            if node.right != oldNode:
+                otherNode = node.right
+                while otherNode.right is not None:
+                    otherNode = otherNode.right
+                return otherNode
+            oldNode = node
+            p -= 1
 
     if __name__ == '__main__':
         import sys
