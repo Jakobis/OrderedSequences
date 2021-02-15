@@ -1,25 +1,25 @@
 class Template:
     def __init__(self):
-        pass
+        raise NotImplementedError
     def add(self, element):
-        pass
+        raise NotImplementedError
     def delete(self, index):
-        pass
+        raise NotImplementedError
     def remove(self, element):
-        pass
+        raise NotImplementedError
     def rank(self, element):
-        pass
+        raise NotImplementedError
     def select(self, index):
-        pass
+        raise NotImplementedError
     def iter(self):
-        pass
+        raise NotImplementedError
     def reversed(self):
-        pass
+        raise NotImplementedError
     def count(self, value):
-        pass
+        raise NotImplementedError
     def successor(self, value):
-        pass
+        raise NotImplementedError
     def predecessor(self, value):
-        pass
+        raise NotImplementedError
     def size(self):
-        pass
+        raise NotImplementedError
