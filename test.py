@@ -22,15 +22,18 @@ if len(sys.argv) > 1:
 
 print(f"Testing following structures: {structures}")
 for ds in structures:
+    testfailed = 0
     for test in testFiles:
         instance = get_class(ds)
         benches = {}
         res = interpret(test, instance, benches)
         if not res:
             print(f'{ds} did not give correct output for test "{test}.in"\n')
+            testfailed += 1
         else:
             outName = f"timings/{ds}.{test}.timings"
             makedirs(dirname(outName), exist_ok=True)
             outFile = open(outName, 'w')
             outFile.write(str(benches))
             outFile.close()
+    print(f"{testfailed}/{len(testFiles)} tests failed on {ds}")

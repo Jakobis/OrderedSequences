@@ -21,7 +21,13 @@ class Blist(Template):
     def count(self, value):
         return self.li.count(value)
     def successor(self, value):
-        return self.select(self, self.rank(self, value) + 1)
+        index = self.rank(self, value) + 1
+        result = self.select(self, index)
+        while result == value:
+            index += 1
+            if index > len(self.li): return None
+            result = self.select(self, index)
+        return self.select(self, index)
     def predecessor(self, value):
         return self.select(self, self.rank(self, value) - 1)
     def size(self):
