@@ -8,7 +8,7 @@ class SortedCollection(Template):
     def add(self, element):
         self.li.insert(element)
     def delete(self, index):
-        self.li.remove(self.li.find(index)) # Broken
+        self.li.delete(index) # Broken
     def remove(self, element):
         self.li.remove(element)
     def rank(self, element):
@@ -183,6 +183,11 @@ class SortedCollectionImp(object):
         i = self.index(item)
         del self._keys[i]
         del self._items[i]
+    
+    def delete(self, index):
+        'Deletes at index'
+        del self._keys[index]
+        del self._items[index]
 
     def find(self, k):
         'Return first item with a key == k.  Raise ValueError if not found.'
