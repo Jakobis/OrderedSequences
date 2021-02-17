@@ -23,6 +23,8 @@ class RBSTree(Template):
         return self.li.successor(value)
     def predecessor(self, value):
         return self.li.predecessor(value)
+    def size(self):
+        return self.li.size()
 
 
 from abc import abstractmethod
