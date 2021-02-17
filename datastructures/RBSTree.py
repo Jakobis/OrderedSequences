@@ -79,6 +79,12 @@ class RedBlackBST:
     def is_empty(self):
         return self.root is None
 
+    def print(self):
+        tree = self._listify(self.root)
+        strings = []
+        for t in reversed(tree):
+            strings.append("".join(t))
+
     def get(self, key):
         return self._get(self.root, key).val
 
@@ -109,17 +115,16 @@ class RedBlackBST:
 
     def put(self, key, val):
         self.root = self._put(self.root, key, val)
-        self.root.color = RedBlackBST.BLACK
+        if self.get(key) == 1:
+            self.root.color = RedBlackBST.BLACK
 
     def _put(self, x, key, val):
         if x is None:
             return Node(key, val, RedBlackBST.RED, 1)
         if x.key > key:
             x.left = self._put(x.left, key, val)
-        elif x.key < key:
-            x.right = self._put(x.right, key, val)
         else:
-            x.val += 1
+            x.right = self._put(x.right, key, val)
 
         # fix-up any right-leaning links
         if self.is_red(x.right) and not self.is_red(x.left):
@@ -407,17 +412,21 @@ class RedBlackBST:
             oldNode = node
             p -= 1
 
-    if __name__ == '__main__':
-        import sys
-
-        st = RedBlackBST()
-        i = 0
-        for line in sys.stdin:
-            for key in line.split():
-                st.put(key, i)
-                i += 1
-        for s in st.level_order():
-            print(s + " " + str(st.get(s)))
-        print()
-        for s in st.Keys():
-            print(s + " " + str(st.get(s)))
+    def _listify(self, node: Node):
+        if node is None:
+            return []
+        l = self._listify(node.left)
+        r = self._listify(node.right)
+        color = "r" if self.is_red(node) else "b"
+        for i in range(max(len(l), len(r))):
+            if len(l) <= i:
+                l.append(r[i])
+            elif len(r) <= i:
+                break
+            else:
+                l[i].extend(r[i])
+        retString = f"{color}{node.key}"
+        extraSpaces = max(l, key=lambda x: sum(len(y) for y in x)) - len(retString)
+        ret = [[retString + (" " * extraSpaces)]]
+        ret.extend(l)
+        return ret
