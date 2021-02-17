@@ -22,7 +22,7 @@ class RBSTree(Template):
     def successor(self, value):
         return self.li.successor(value)
     def predecessor(self, value):
-        return self.li.select(self.li.rank(value) - 1)
+        return self.li.predecessor(value)
 
 
 from abc import abstractmethod
@@ -644,4 +644,20 @@ class RedBlackBST(Generic[Key, Val]):
             else:
                 best = x
                 x = x.left
+        if best is None:
+            return None
+        return best.key
+
+    def predecessor(self, key):
+        x = self._root
+        best = None
+
+        while x:
+            if x.key >= key:
+                x = x.left
+            else:
+                best = x
+                x = x.right
+        if best is None:
+            return None
         return best.key
