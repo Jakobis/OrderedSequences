@@ -1,5 +1,8 @@
 import filecmp, os, time
 
+from datastructures import RBSTree
+
+
 def preparebenches(benches):
     benches['a'] = []
     benches['d'] = []
