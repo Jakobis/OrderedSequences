@@ -6,13 +6,13 @@ class RBSTree(Template):
     def add(self, element):
         self.li.put(element, 1)
     def delete(self, index):
-        pass
+        self.li.delete(self.li.select(index))
     def remove(self, element):
         self.li.delete(element)
     def rank(self, element):
-        self.li.rank(element)
+        return self.li.rank(element)
     def select(self, index):
-        self.li.select(index)
+        return self.li.select(index)
     def iter(self):
         return iter(self.li.keys())
     def reversed(self):
@@ -20,9 +20,9 @@ class RBSTree(Template):
     def count(self, element):
         return self.li.get(element)
     def successor(self, value):
-        pass
+        return self.li.successor(value)
     def predecessor(self, value):
-        pass
+        return self.li.select(self.li.rank(value) - 1)
 
 
 from abc import abstractmethod
@@ -125,10 +125,8 @@ class RedBlackBST(Generic[Key, Val]):
             return Node(key, val, self.RED, 1)
         if key < h.key:
             h.left = self._put(h.left, key, val)
-        elif key > h.key:
-            h.right = self._put(h.right, key, val)
         else:
-            h.val = val
+            h.right = self._put(h.right, key, val)
 
         assert h is not None
         if self._is_red(h.right) and not self._is_red(h.left):
@@ -174,6 +172,30 @@ class RedBlackBST(Generic[Key, Val]):
             else:
                 return x.val
         return None
+
+    def _getLastNodeBranch(self, x: Optional[Node[Key, Val]], key: Key) -> Optional[list]:
+        """Returns value with the given key in subtree rooted at x. None if no
+        such key.
+        :param x: root of currently inspected subtree.
+        :param key: the key
+        :return: value associated with given key. None if no such key
+        """
+        branch = []
+        found = False
+        while x is not None:
+            if key == x.key:
+                found = True
+            branch.append(x)
+            if key < x.key:
+                x = x.left
+            else:
+                x = x.right
+        if not found:
+            raise NoSuchElementException
+        while branch[-1].key != key:
+            branch.pop()
+        return branch
+
 
     def delete_min(self) -> None:
         """Removes the smallest key and associated value from the symbol table.
@@ -611,3 +633,15 @@ class RedBlackBST(Generic[Key, Val]):
         if t is not None:
             return t
         return x
+
+    def successor(self, key):
+        x = self._root
+        best = None
+
+        while x:
+            if x.key <= key:
+                x = x.right
+            else:
+                best = x
+                x = x.left
+        return best.key

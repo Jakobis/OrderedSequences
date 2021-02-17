@@ -48,7 +48,7 @@ def interpret(test, sequence, benches = {}, testinterval = 999999999):
     for line in lines[1:]:
         if count % testinterval == 0: 
             start_time = time.perf_counter()
-        if sequence.__name__ == "RBSTree" and test == "11":
+        if sequence.__name__ == "RBSTree" and test == "succ":
             debug = ""
         parts = line.split()
         if parts[0] == "a":
