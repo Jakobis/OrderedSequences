@@ -47,9 +47,8 @@ def interpret(test, sequence, benches = {}, testinterval = 999999999):
     count = 1
     for line in lines[1:]:
         if count % testinterval == 0: 
-            start_time = time.perf_counter()
-        if sequence.__name__ == "RBSTree" and test == "succ":
-            debug = ""
+            start_time = time.process_time_ns()
+       
         parts = line.split()
         if parts[0] == "a":
             sequence.add(sequence, int(parts[1]))
@@ -69,7 +68,7 @@ def interpret(test, sequence, benches = {}, testinterval = 999999999):
             write(sequence.predecessor(sequence, int(parts[1])))
         
         if count % testinterval == 0: 
-            end_time = time.perf_counter()
+            end_time = time.process_time_ns()
             finding = [start_time, end_time, end_time-start_time, sequence.size(sequence)]
             benches[parts[0]].append(finding)
         count += 1
