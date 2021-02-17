@@ -2,13 +2,13 @@ from datastructures.Template import Template
 
 from bisect import bisect_left, bisect_right
 
-class Basic(Template):
+class SortedCollection(Template):
     def __init__(self):
-        self.li = SortedCollection()
+        self.li = SortedCollectionImp()
     def add(self, element):
         self.li.insert(element)
     def delete(self, index):
-        self.li.remove(self.li.find(index))
+        self.li.delete(index) # Broken
     def remove(self, element):
         self.li.remove(element)
     def rank(self, element):
@@ -21,11 +21,23 @@ class Basic(Template):
         return reversed(self.li)
     def count(self, value):
         return self.li.count(value)
+    def successor(self, value):
+        index = self.rank(self, value) + 1
+        result = self.select(self, index)
+        while result == value:
+            index += 1
+            if index > len(self.li): return None
+            result = self.select(self, index)
+        return self.select(self, index)
+    def predecessor(self, value):
+        return self.select(self, self.rank(self, value) - 1)
+    def size(self):
+        return len(self.li)
 
 
 #sourcecode
 
-class SortedCollection(object):
+class SortedCollectionImp(object):
     '''Sequence sorted by a key function.
 
     SortedCollection() is much easier to work with than using bisect() directly.
@@ -181,6 +193,11 @@ class SortedCollection(object):
         i = self.index(item)
         del self._keys[i]
         del self._items[i]
+    
+    def delete(self, index):
+        'Deletes at index'
+        del self._keys[index]
+        del self._items[index]
 
     def find(self, k):
         'Return first item with a key == k.  Raise ValueError if not found.'

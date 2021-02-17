@@ -1,23 +1,23 @@
 from datastructures.Template import Template
-from blist import sortedlist
+from pyskiplist import SkipList
 
-class Blist(Template):
+class Skiplist(Template):
     def __init__(self):
-        self.li = sortedlist()
+        self.li = SkipList()
     def add(self, element):
-        self.li.add(element)
+        self.li.insert(element, element)
     def delete(self, index):
-        self.li.pop(index)
+        self.li.__delitem__(index)
     def remove(self, element):
         self.li.remove(element)
     def rank(self, element):
         return self.li.index(element)
     def select(self, index):
-        return self.li[index]
+        return self.li[index][0]
     def iter(self):
-        return iter(self.li)
+        return self.li.values()
     def reversed(self):
-        return self.li.__reversed__()
+        return reversed(self.li)
     def count(self, value):
         return self.li.count(value)
     def successor(self, value):
