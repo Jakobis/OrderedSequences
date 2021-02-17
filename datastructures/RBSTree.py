@@ -24,26 +24,6 @@ class RBSTree(Template):
     def predecessor(self, value):
         pass
 
-"""
-   Execution:    python RedBlackBST.py < input.txt
-   Data files:   https://algs4.cs.princeton.edu/33balanced/tinyST.txt
-   A symbol table implemented using a left-leaning red-black BST.
-   This is the 2-3 version.
-   % more tinyST.txt
-   S E A R C H E X A M P L E
-   % python RedBlackBST.py < tinyST.txt
-   A 8
-   C 4
-   E 12
-   H 5
-   L 11
-   M 9
-   P 10
-   R 3
-   S 0
-   X 7
-"""
-
 
 class Node:
 
@@ -79,44 +59,25 @@ class RedBlackBST:
     def is_empty(self):
         return self.root is None
 
-    def print(self):
-        tree = self._listify(self.root)
-        strings = []
-        for t in reversed(tree):
-            strings.append("".join(t))
-
     def get(self, key):
-        return self._get(self.root, key).val
+        return self._get(self.root, key)
 
-    def _get(self, x, key) -> Node:
+    def _get(self, x, key):
         while x is not None:
             if x.key == key:
-                return x
+                return x.val
             elif x.key < key:
                 x = x.right
             else:
                 x = x.left
-        raise ValueError("No such value")
-
-    def _getList(self, x, key):
-        l = [x]
-        while x is not None:
-            if x.key == key:
-                return l
-            elif x.key < key:
-                x = x.right
-            else:
-                x = x.left
-            l.append(x)
-        raise ValueError("No such value")
+        return None
 
     def contains(self, key):
         return self.get(key) is not None
 
     def put(self, key, val):
         self.root = self._put(self.root, key, val)
-        if self.get(key) == 1:
-            self.root.color = RedBlackBST.BLACK
+        self.root.color = RedBlackBST.BLACK
 
     def _put(self, x, key, val):
         if x is None:
@@ -134,7 +95,7 @@ class RedBlackBST:
         if self.is_red(x.left) and self.is_red(x.right):
             self.flip_colors(x)
 
-        x.size = self._size(x.left) + self._size(x.right) + x.val
+        x.size = self._size(x.left) + self._size(x.right) + 1
         return x
 
     def rotate_left(self, h):
@@ -218,17 +179,17 @@ class RedBlackBST:
          To iterate over all of the keys in the symbol table named {@code st},
          use the foreach notation: {for key in st.keys}
         """
-        queue = []
+        queue = Queue()
         self._keys(self.root, queue, self.min(), self.max())
         return queue
 
-    def _keys(self, x, queue: list, lo, hi):
+    def _keys(self, x, queue, lo, hi):
         if x is None:
             return
         if x.key > lo:
             self._keys(x.left, queue, lo, hi)
         if lo <= x.key <= hi:
-            queue.append(x.key)
+            queue.enqueue(x.key)
         if x.key < hi:
             self._keys(x.right, queue, lo, hi)
 
@@ -322,13 +283,6 @@ class RedBlackBST:
         if key is None:
             raise ValueError("argument is null")
 
-        # check if there are multiple of the element in the tree
-        x = self._get(self.root, key)
-        if x.val > 1:
-            x.val -= 1
-            x.size = self._size(x.left) + self._size(x.right) + x.val
-            return
-
         # if both children of root are black, set root to red
         if not self.is_red(self.root.left) and not self.is_red(self.root.right):
             self.root.color = RedBlackBST.RED
@@ -337,7 +291,7 @@ class RedBlackBST:
         if not self.is_empty():
             self.root.color = RedBlackBST.BLACK
 
-    def _delete(self, h: Node, key):
+    def _delete(self, h, key):
         if h is None:
             return None
 
@@ -392,41 +346,3 @@ class RedBlackBST:
             self.flip_colors(h)
         h.size = self._size(h.left) + self._size(h.right) + 1
         return h
-
-    def successor(self, element):
-        if element is None:
-            raise ValueError("argument is null")
-        nodeList = self._getList(self.root, element)
-        node = nodeList[-1]
-        if node.right is not None:
-            return node.right.key
-        p = len(nodeList) - 2
-        oldNode = node
-        while p > 0:
-            node = nodeList[p]
-            if node.right != oldNode:
-                otherNode = node.right
-                while otherNode.right is not None:
-                    otherNode = otherNode.right
-                return otherNode
-            oldNode = node
-            p -= 1
-
-    def _listify(self, node: Node):
-        if node is None:
-            return []
-        l = self._listify(node.left)
-        r = self._listify(node.right)
-        color = "r" if self.is_red(node) else "b"
-        for i in range(max(len(l), len(r))):
-            if len(l) <= i:
-                l.append(r[i])
-            elif len(r) <= i:
-                break
-            else:
-                l[i].extend(r[i])
-        retString = f"{color}{node.key}"
-        extraSpaces = max(l, key=lambda x: sum(len(y) for y in x)) - len(retString)
-        ret = [[retString + (" " * extraSpaces)]]
-        ret.extend(l)
-        return ret
