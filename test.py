@@ -27,10 +27,7 @@ if len(sys.argv) > 1:
     benchmarkinterval = int(sys.argv[1])
 
 print(f"Testing following structures: {structures}")
-jakobIsLazy = True
 for ds in structures:
-    if ds == "Blist" and jakobIsLazy:
-        continue
     testfailed = 0
     for test in testFiles:
         instance = get_class(ds)
