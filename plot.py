@@ -18,7 +18,9 @@ df = dfcsv("Blist")
 ax = df.plot(x ='Size', y='mean', kind = 'line', label="Blist")	
 
 addplot("SortedContainer", ax)
-addplot("Basic", ax)
+#addplot("Basic", ax)
+addplot("Skiplist", ax)
+addplot("RBSTree", ax)
 addplot("SortedCollection", ax)
 
 
