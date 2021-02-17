@@ -20,14 +20,16 @@ maxint = 2147483647
 
 current_list = SortedList()
 
-count_of_ops = {}
-for o in operations: count_of_ops[o] = 0
+def randomchoice(i):
+    return random.choices(operations, weights)[0]
+
+def testadd(i):
+    return "add"
 
 
 infile.write(f"{n}\n")
 for i in range(n):
-    op = random.choices(operations, weights)[0]
-    count_of_ops[op] += 1
+    op = testadd(i)
     if op == "add" or len(current_list) < 2:
         value = random.randint(minint, maxint)
         current_list.add(value)

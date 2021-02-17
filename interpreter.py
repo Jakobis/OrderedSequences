@@ -66,7 +66,7 @@ def interpret(test, sequence, benches = {}, testinterval = 999999999):
         
         if count % testinterval == 0: 
             end_time = time.perf_counter()
-            finding = [start_time, end_time, sequence.size(sequence)]
+            finding = [start_time, end_time, end_time-start_time, sequence.size(sequence)]
             benches[parts[0]].append(finding)
         count += 1
 
