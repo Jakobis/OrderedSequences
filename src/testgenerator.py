@@ -1,4 +1,5 @@
 import sys, os
+import pathlib
 from sortedcontainers import SortedList
 import random
 
@@ -73,6 +74,7 @@ if __name__ == '__main__':
     elif testtype == "add":
         ops = ["add" for i in range(n)]
     test_input, test_answer = generate_testcase(n, ops)
+    pathlib.Path('../tests/').mkdir(parents=True, exist_ok=True) 
     infile = open(f"../tests/{filename}.in", "w")
     outfile = open(f"../tests/{filename}.out", "w")
     infile.write("\n".join(test_input))

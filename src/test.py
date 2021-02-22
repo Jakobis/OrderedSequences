@@ -3,6 +3,7 @@ import datastructures
 from interpreter import interpret
 from os import listdir, makedirs
 from os.path import isfile, join, dirname
+import pathlib
 import sys
 testFiles = [f[:-3] for f in listdir("../tests") if isfile(join("../tests", f)) and f.endswith(".in")]
 
@@ -37,6 +38,7 @@ for ds in structures:
             print(f'{ds} did not give correct output for test "{test}.in"\n')
             testfailed += 1
         else:
+            pathlib.Path('../results/timings/').mkdir(parents=True, exist_ok=True) 
             outName = f"../results/timings/{ds}.{test}.csv"
             makedirs(dirname(outName), exist_ok=True)
             outFile = open(outName, 'w')

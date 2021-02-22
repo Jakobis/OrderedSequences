@@ -8,6 +8,7 @@ __pycache__/
 /timings
 *large.in
 *large.out
+/results
 *.csv
 
 # User-specific stuff
