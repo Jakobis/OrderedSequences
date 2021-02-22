@@ -9,8 +9,8 @@ if len(sys.argv) != 3:
     exit(-1)
 n = int(sys.argv[1])
 filename = sys.argv[2].strip()
-infile = open(f"tests/{filename}.in", "w")
-outfile = open(f"tests/{filename}.out", "w")
+infile = open(f"../tests/{filename}.in", "w")
+outfile = open(f"../tests/{filename}.out", "w")
 
 operations = ["add", "delete", "remove", "rank", "select", "sum", "successor", "predecessor"]
 weights    = (   50,       10,       10,     20,       30,    10,          15,           15)

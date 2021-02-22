@@ -4,7 +4,7 @@ from interpreter import interpret
 from os import listdir, makedirs
 from os.path import isfile, join, dirname
 import sys
-testFiles = [f[:-3] for f in listdir("tests") if isfile(join("tests", f)) and f.endswith(".in")]
+testFiles = [f[:-3] for f in listdir("../tests") if isfile(join("../tests", f)) and f.endswith(".in")]
 
 def get_class( name ):
     kls = "datastructures.{0}.{0}".format(name)
@@ -22,7 +22,7 @@ def outputtimingresults(file, results):
         for l in results[k]:
             file.write(f"{k},{l[0]},{l[1]},{l[2]},{l[3]}\n")
 
-benchmarkinterval = 9999999
+benchmarkinterval = 10
 if len(sys.argv) > 1:
     benchmarkinterval = int(sys.argv[1])
 
@@ -37,10 +37,10 @@ for ds in structures:
             print(f'{ds} did not give correct output for test "{test}.in"\n')
             testfailed += 1
         else:
-            outName = f"timings/{ds}.{test}.csv"
+            outName = f"../results/timings/{ds}.{test}.csv"
             makedirs(dirname(outName), exist_ok=True)
             outFile = open(outName, 'w')
             outputtimingresults(outFile, benches)
             outFile.close()
 
-    print(f"{testfailed}/{len(testFiles)} tests failed on {ds}")
+    print(f"{len(testFiles) - testfailed}/{len(testFiles)} tests succeeded on {ds}")

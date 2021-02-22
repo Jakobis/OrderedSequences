@@ -7,7 +7,7 @@ def mad(data, axis=None):
     return np.mean(np.absolute(data - np.mean(data, axis)), axis)
 
 def dfcsv(name):
-    data = pd.read_csv(f"timings/{name}.medium.csv")
+    data = pd.read_csv(f"../results/timings/{name}.medium.csv")
     df = pd.DataFrame(data,columns=['Time(s)','Size'])
     df[(np.abs(stats.zscore(df['Time(s)'])) < 3)]
     df['median'] = df['Time(s)'].rolling(1000).median()
@@ -39,23 +39,3 @@ plt.grid(True, which="both", linestyle='--')
 ax.set_xscale('log')
 ax.set_yscale('log')
 plt.show()
-"""
-data = np.genfromtxt("timings/Blist.large.csv",delimiter=',',dtype=[('str'),('f8'),('f8'),('f8'),('i8')], names=True)
-print(len(data))
-print(type(data))
-zscores = zscore(np.divide(data['Times'], data['Size'])) 
-print(zscores)
-outlier_mask = (data['Times'] < np.percentile(data['Times'], 95))
-print(len(data[outlier_mask]))
-
-data = data[outlier_mask]
-plt.figure()
-ax = plt.subplot(111)
-plt.plot(data['Size'], data['Times'])
-plt.ylabel('Time(s)')
-plt.xlabel('N')
-locs,labels = plt.xticks()
-plt.xticks(locs, map(lambda x: "%i" % x, locs))
-ax.set_xlim(xmin=0)
-plt.show()
-"""
