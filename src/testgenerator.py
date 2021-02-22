@@ -11,9 +11,24 @@ def generate_testcase(n, ops):
     test_answer = []
     test_input.append(f"{n}")
     current_list = SortedList()
-    for op in ops:
+    for i, op in enumerate(ops):
         if op == "add" or len(current_list) < 2:
             value = random.randint(MININT, MAXINT)
+            current_list.add(value)
+            test_input.append(f"a {value}")
+
+        if op == "add_decreasing":
+            value = current_list[0] - 1
+            current_list.add(value)
+            test_input.append(f"a {value}")
+        
+        if op == "add_middle":
+            value = 20 # TODO: Implement this
+            current_list.add(value)
+            test_input.append(f"a {value}")
+
+        if op == "add_increasing":
+            value = current_list[-1] + 1
             current_list.add(value)
             test_input.append(f"a {value}")
 
@@ -70,9 +85,20 @@ if __name__ == '__main__':
     ops = []
     testtype = sys.argv[3].strip()
     if testtype == "random":
-        ops = [randomchoice(i) for i in range(n)]
+        ops = [randomchoice(i) for i in range(n - 2)]
     elif testtype == "add":
         ops = ["add" for i in range(n)]
+    elif testtype == "decreasing":
+        ops = ["add_decreasing" for i in range(n)]
+    elif testtype == "increasing":
+        ops = ["add_increasing" for i in range(n)]
+    elif testtype == "add_alterinating":
+        ops = ["add_increasing" if i % 2 else "add_decreasing" for i in range(n)]
+    elif testtype == "add_middle":
+        ops = ["add_middle" for i in range(n)]
+    else:
+        print("No test type supplied")
+        exit(-1)
     test_input, test_answer = generate_testcase(n, ops)
     pathlib.Path('../tests/').mkdir(parents=True, exist_ok=True) 
     infile = open(f"../tests/{filename}.in", "w")
