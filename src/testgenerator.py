@@ -46,7 +46,7 @@ def generate_testcase(n, ops):
             index = random.randint(0, len(current_list) - 1)
             value = current_list[index]
             test_input.append(f"r {value}")
-            test_answer.append(f"{index}")
+            test_answer.append(f"{current_list.index(value)}")
 
         elif op == "select":
             index = random.randint(0, len(current_list) - 1)
