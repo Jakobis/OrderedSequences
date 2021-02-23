@@ -16,7 +16,7 @@ def generate_testcase(n, ops):
             value = random.randint(MININT, MAXINT)
             current_list.add(value)
             test_input.append(f"a {value}")
-
+        
         if op == "add_decreasing":
             value = current_list[0] - 1
             current_list.add(value)
@@ -31,7 +31,7 @@ def generate_testcase(n, ops):
             value = current_list[-1] + 1
             current_list.add(value)
             test_input.append(f"a {value}")
-
+            
         elif op == "delete":
             index = random.randint(0, len(current_list) - 1)
             current_list.pop(index)
@@ -60,20 +60,30 @@ def generate_testcase(n, ops):
         elif op == "successor":
             index = random.randint(0, len(current_list) - 2)
             value = current_list[index]
+            result = current_list[index]
+            while result == value:
+                index += 1
+                if index > len(current_list): raise Exception("Sorry, bad code")
+                result = current_list[index]
             test_input.append(f"su {value}")
-            test_answer.append(f"{current_list[index + 1]}")
+            test_answer.append(f"{result}")
 
         elif op == "predecessor":
             index = random.randint(1, len(current_list) - 1)
             value = current_list[index]
+            result = current_list[index - 1]
+            while result == value:
+                index -= 1
+                if index < 0: raise Exception("Sorry, bad code")
+                result = current_list[index]
             test_input.append(f"pr {value}")
-            test_answer.append(f"{current_list[index - 1]}")
+            test_answer.append(f"{result}")
     return (test_input, test_answer)
 
 
 def randomchoice(i):
-    operations = ["add", "delete", "remove", "rank", "select", "sum", "successor", "predecessor"]
-    weights    = (   50,       10,       10,     20,       30,    10,          15,           15)
+    operations = ["add", "delete", "remove", "rank", "select", "successor", "predecessor"]
+    weights    = (   50,       10,       10,     20,       30,          15,           15)
     return random.choices(operations, weights)[0]
 
 if __name__ == '__main__':
@@ -85,7 +95,7 @@ if __name__ == '__main__':
     ops = []
     testtype = sys.argv[3].strip()
     if testtype == "random":
-        ops = [randomchoice(i) for i in range(n - 2)]
+        ops = [randomchoice(i) for i in range(n)]
     elif testtype == "add":
         ops = ["add" for i in range(n)]
     elif testtype == "decreasing":
