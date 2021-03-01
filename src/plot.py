@@ -31,7 +31,7 @@ def createplotforoperation(op):
         return np.mean(np.absolute(data - np.mean(data, axis)), axis)
 
     def dfcsv(name):
-        data = pd.read_csv(f"../results/timings/{name}.graphtest.csv")
+        data = pd.read_csv(f"../results/timings/{name}.large.csv")
         df = pd.DataFrame(data[data["Operation"] == op],columns=['Time(s)','Size'])
         df['median'] = df['Time(s)'].rolling(1000).median()
         # Below line removes outliers but is not necessary
@@ -43,14 +43,15 @@ def createplotforoperation(op):
         df = dfcsv(name)
         df.plot(x ='Size', y='median', kind = 'line', ax = ax, label=name)
 
-    df = dfcsv("Blist")
-    ax = df.plot(x ='Size', y='median', kind = 'line', label="Blist")	
+    df = dfcsv("SortedContainer")
+    ax = df.plot(x ='Size', y='median', kind = 'line', label="SortedContainer")	
 
-    addplot("SortedContainer", ax)
+    addplot("SortedArray", ax)
+    addplot("Blist", ax)
     #addplot("Basic", ax)
-    addplot("Skiplist", ax)
-    addplot("RBSTree", ax)
-    addplot("SortedCollection", ax)
+    #addplot("Skiplist", ax)
+    #addplot("RBSTree", ax)
+    #addplot("SortedCollection", ax)
 
 
     locs,labels = plt.xticks()
