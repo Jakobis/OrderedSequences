@@ -17,7 +17,7 @@ def compareanswers(answerfilename, resultfilename, structure):
     answerfile = open(answerfilename, 'r')
     result = resultfile.readlines()
     answer = answerfile.readlines()
-    printedonce = False
+    printedOnce = False
     equal = True
     if len(result) != len(answer):
         print(f"{structure} failed on {answerfile.name} with a difference in length.\nWas {len(result)}, expected {len(answer)}")
@@ -28,9 +28,9 @@ def compareanswers(answerfilename, resultfilename, structure):
         for i, (r, a) in enumerate(zip(result, answer)):
             if r.strip() != a.strip():
                 equal = False
-                if not printedonce:
+                if not printedOnce:
                     print(f"{structure} failed on {answerfile.name}.\nWas {r.strip()}, expected {a.strip()} on line {i}")
-                    printedonce = True
+                    printedOnce = True
     resultfile.close()
     answerfile.close()
     return equal
