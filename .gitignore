@@ -6,6 +6,10 @@ __pycache__/
 *.timings
 /output
 /timings
+*large.in
+*large.out
+/results
+*.csv
 
 # User-specific stuff
 .idea/**/workspace.xml

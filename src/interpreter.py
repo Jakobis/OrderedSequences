@@ -1,8 +1,5 @@
 import filecmp, os, time
 
-from datastructures import RBSTree
-
-
 def preparebenches(benches):
     benches['a'] = []
     benches['d'] = []
@@ -38,8 +35,8 @@ def compareanswers(answerfilename, resultfilename, structure):
 
 def interpret(test, sequence, benches = {}, testinterval = 999999999):
     preparebenches(benches)
-    inFile = open(f'tests/{test}.in', 'r')
-    outName = f"output/{sequence.__name__}.{test}.testoutput"
+    inFile = open(f'../tests/{test}.in', 'r')
+    outName = f"../results/output/{sequence.__name__}.{test}.testoutput"
     os.makedirs(os.path.dirname(outName), exist_ok=True)
     outFile = open(outName, 'w')
     write = lambda x: outFile.write(f'{x}\n')
@@ -74,7 +71,7 @@ def interpret(test, sequence, benches = {}, testinterval = 999999999):
         count += 1
 
     outFile.close()
-    res = compareanswers(f'tests/{test}.out', outName, sequence.__name__)
+    res = compareanswers(f'../tests/{test}.out', outName, sequence.__name__)
     if res:
         os.remove(outName)
     return res
