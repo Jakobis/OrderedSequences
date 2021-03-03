@@ -69,6 +69,7 @@ def interpret(test, sequence, benches = {}, testinterval = 999999999):
         except :
             print(f"{sequence} failed on testcase {i} consisting of {line}")
             traceback.print_exc()
+            raise Exception
 
         if count % testinterval == 0:
             end_time = time.process_time_ns()
