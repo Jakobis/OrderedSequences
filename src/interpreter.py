@@ -1,4 +1,6 @@
 import filecmp, os, time
+import traceback
+
 
 def preparebenches(benches):
     benches['a'] = []
@@ -42,29 +44,34 @@ def interpret(test, sequence, benches = {}, testinterval = 999999999):
     write = lambda x: outFile.write(f'{x}\n')
     lines = inFile.readlines()
     count = 1
-    for line in lines[1:]:
-        if count % testinterval == 0: 
+    for i, line in enumerate(lines[1:]):
+        if count % testinterval == 0:
             start_time = time.process_time_ns()
-       
+
         parts = line.split()
-        if parts[0] == "a":
-            sequence.add(sequence, int(parts[1]))
-        elif parts[0] == "d":
-            sequence.delete(sequence, int(parts[1]))
-        elif parts[0] == "re":
-            sequence.remove(sequence, int(parts[1]))
-        elif parts[0] == "r":
-            write(sequence.rank(sequence, int(parts[1])))
-        elif parts[0] == "s":
-            write(sequence.select(sequence, int(parts[1])))
-        elif parts[0] == "sum":
-            write(sum(sequence.iter(sequence)))
-        elif parts[0] == "su":
-            write(sequence.successor(sequence, int(parts[1])))
-        elif parts[0] == "pr":
-            write(sequence.predecessor(sequence, int(parts[1])))
-        
-        if count % testinterval == 0: 
+        try:
+            if parts[0] == "a":
+                sequence.add(sequence, int(parts[1]))
+            elif parts[0] == "d":
+                sequence.delete(sequence, int(parts[1]))
+            elif parts[0] == "re":
+                sequence.remove(sequence, int(parts[1]))
+            elif parts[0] == "r":
+                write(sequence.rank(sequence, int(parts[1])))
+            elif parts[0] == "s":
+                write(sequence.select(sequence, int(parts[1])))
+            elif parts[0] == "sum":
+                write(sum(sequence.iter(sequence)))
+            elif parts[0] == "su":
+                write(sequence.successor(sequence, int(parts[1])))
+            elif parts[0] == "pr":
+                write(sequence.predecessor(sequence, int(parts[1])))
+        except :
+            print(f"{sequence} failed on testcase {i} consisting of {line}")
+            traceback.print_exc()
+            raise Exception
+
+        if count % testinterval == 0:
             end_time = time.process_time_ns()
             finding = [start_time, end_time, end_time-start_time, sequence.size(sequence)]
             benches[parts[0]].append(finding)

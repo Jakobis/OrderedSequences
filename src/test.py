@@ -29,6 +29,8 @@ if len(sys.argv) > 1:
 
 print(f"Testing following structures: {structures}")
 for ds in structures:
+    if ds != "RBSTree":
+        continue
     testfailed = 0
     for test in testFiles:
         instance = get_class(ds)

@@ -12,22 +12,22 @@ def generate_testcase(n, ops):
     test_input.append(f"{n}")
     current_list = SortedList()
     for i, op in enumerate(ops):
-        if op == "add" or len(current_list) < 2:
+        if op == "add" or len(current_list) < 10:
             value = random.randint(MININT, MAXINT)
             current_list.add(value)
             test_input.append(f"a {value}")
         
-        if op == "add_decreasing":
+        elif op == "add_decreasing":
             value = current_list[0] - 1
             current_list.add(value)
             test_input.append(f"a {value}")
         
-        if op == "add_middle":
+        elif op == "add_middle":
             value = 20 # TODO: Implement this
             current_list.add(value)
             test_input.append(f"a {value}")
 
-        if op == "add_increasing":
+        elif op == "add_increasing":
             value = current_list[-1] + 1
             current_list.add(value)
             test_input.append(f"a {value}")
