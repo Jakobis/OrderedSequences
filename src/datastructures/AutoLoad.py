@@ -393,8 +393,6 @@ class SortedList(MutableSequence):
                 for val in values:
                     _add(val)
                 return
-        if len(values) > self._load * 2:
-            self._load *= 2
         _load = self._load
         _lists.extend(values[pos:(pos + _load)]
                       for pos in range(0, len(values), _load))
@@ -471,8 +469,10 @@ class SortedList(MutableSequence):
         _listlen = len(self._lists)
         _load = self._load
         if _load > self.DEFAULT_LOAD_FACTOR and _listlen < _load >> 1:
+            print(f"new load = {_load >> 1}")
             self._reset(_load >> 1)
         elif _listlen > _load << 1:
+            print(f"new load = {_load << 1}")
             self._reset(_load << 1)
 
     def remove(self, value):
