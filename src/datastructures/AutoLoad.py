@@ -393,8 +393,6 @@ class SortedList(MutableSequence):
                 for val in values:
                     _add(val)
                 return
-        if len(values) > self._load * 2:
-            self._load *= 2
         _load = self._load
         _lists.extend(values[pos:(pos + _load)]
                       for pos in range(0, len(values), _load))
