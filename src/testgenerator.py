@@ -80,14 +80,13 @@ def generate_testcase(n, ops):
             test_answer.append(f"{result}")
     return (test_input, test_answer)
 
-
+operations = ["add", "delete", "remove", "rank", "select", "successor", "predecessor"]
 def randomchoice(i):
-    operations = ["add", "delete", "remove", "rank", "select", "successor", "predecessor"]
     weights    = (   50,       10,       10,     20,       30,          15,           15)
     return random.choices(operations, weights)[0]
 
 if __name__ == '__main__':
-    if len(sys.argv) != 4:
+    if len(sys.argv) < 4:
         print("Please input number of lines, testname and test type (random, add)")
         exit(-1)
     n = int(sys.argv[1])
@@ -106,10 +105,20 @@ if __name__ == '__main__':
         ops = ["add_increasing" if i % 2 else "add_decreasing" for i in range(n)]
     elif testtype == "add_middle":
         ops = ["add_middle" for i in range(n)]
+    elif testtype == "power":
+        filename = 10**n
+        ops = ["add"] * 10**n
+        for op in operations:
+            for i in range(100):
+                ops.append(op)
+                if "add" in op:
+                    ops.append("delete")
+                elif "delete" in op or "remove" in op:
+                    ops.append("add")
     else:
         print("No test type supplied")
         exit(-1)
-    test_input, test_answer = generate_testcase(n, ops)
+    test_input, test_answer = generate_testcase(len(ops), ops)
     pathlib.Path('../tests/').mkdir(parents=True, exist_ok=True) 
     infile = open(f"../tests/{filename}.in", "w")
     outfile = open(f"../tests/{filename}.out", "w")
