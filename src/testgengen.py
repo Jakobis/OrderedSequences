@@ -13,8 +13,8 @@ def get_class( name ):
     return m
 
 
-for i in range(1000):
-    testSize = 100
+for i in range(100000):
+    testSize = 1000
     testName = "gen"
     os.system(f"python testgenerator.py {testSize} {testName} random")
     sequence = get_class("RBSTree")

@@ -25,6 +25,8 @@ class RBSTree(Template):
         return self.li.predecessor(value)
     def size(self):
         return self.li.size()
+    def printTree(self):
+        self.li.printTree()
 
 
 from abc import abstractmethod
@@ -663,3 +665,14 @@ class RedBlackBST(Generic[Key, Val]):
         if best is None:
             return None
         return best.key
+
+    def printTree(self):
+        self._printTree(self._root, 0, "")
+
+    def _printTree(self, node, indentation, prefix):
+        representation = f"{prefix} {'r' if self._is_red(node) else 'b'} {node.key} ┤"
+        if node.right:
+            self._printTree(node.right, indentation + len(representation) - 1, '┌')
+        print(" " * indentation + representation)
+        if node.left:
+            self._printTree(node.left, indentation + len(representation) - 1, '└')
