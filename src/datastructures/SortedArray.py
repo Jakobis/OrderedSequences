@@ -3,8 +3,6 @@ from datastructures.Template import Template
 class SortedArray(Template):
     def __init__(self, preload = [0, 0]):
         self.li = _SortedArray('q', preload)
-        for i in preload: # Now its just me who is dumb :)
-            self.add(self, i)
     
     def add(self, element):
         self.li.add(element)
@@ -132,6 +130,8 @@ class _SortedArray(MutableSequence):
         self._index = []
         self._offset = 0
 
+        if iterable is not None:
+            self.update(iterable)
 
     @property
     def key(self):
