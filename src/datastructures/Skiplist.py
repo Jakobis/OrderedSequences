@@ -2,8 +2,10 @@ from datastructures.Template import Template
 from pyskiplist import SkipList
 
 class Skiplist(Template):
-    def __init__(self):
+    def __init__(self, preload = []):
         self.li = SkipList()
+        for i in preload: # init dumb
+            self.add(self, i)
     def add(self, element):
         self.li.insert(element, element)
     def delete(self, index):

@@ -1,5 +1,5 @@
 class Template:
-    def __init__(self):
+    def __init__(self, preload = []):
         raise NotImplementedError
     def add(self, element):
         raise NotImplementedError

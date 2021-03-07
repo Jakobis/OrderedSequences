@@ -2,8 +2,8 @@ from datastructures.Template import Template
 from blist import sortedlist
 
 class Blist(Template):
-    def __init__(self):
-        self.li = sortedlist()
+    def __init__(self, preload = []):
+        self.li = sortedlist(preload)
     def add(self, element):
         self.li.add(element)
     def delete(self, index):

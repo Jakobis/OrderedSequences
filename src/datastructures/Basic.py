@@ -1,8 +1,8 @@
 from datastructures.Template import Template
 
 class Basic(Template):
-    def __init__(self):
-        self.li = []
+    def __init__(self, preload = []):
+        self.li = sorted(preload)
     def add(self, element):
         self.li.append(element)
         self.li.sort()

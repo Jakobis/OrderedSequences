@@ -1,8 +1,10 @@
 from datastructures.Template import Template
 
 class RBSTree(Template):
-    def __init__(self):
+    def __init__(self, preload = []):
         self.li = RedBlackBST()
+        for i in preload: # Init is dumb :(
+            self.add(self, i)
     def add(self, element):
         self.li.put(element, 1)
     def delete(self, index):

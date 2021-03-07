@@ -3,8 +3,8 @@ from datastructures.Template import Template
 from bisect import bisect_left, bisect_right
 
 class SortedCollection(Template):
-    def __init__(self):
-        self.li = SortedCollectionImp()
+    def __init__(self, preload = []):
+        self.li = SortedCollectionImp(preload)
     def add(self, element):
         self.li.insert(element)
     def delete(self, index):

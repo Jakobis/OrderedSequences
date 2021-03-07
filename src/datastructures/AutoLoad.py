@@ -4,8 +4,8 @@ from datastructures.Template import Template
 
 
 class AutoLoad(Template):
-    def __init__(self):
-        self.li = SortedList()
+    def __init__(self, preload = []):
+        self.li = SortedList(preload)
 
     def add(self, element):
         self.li.add(element)
