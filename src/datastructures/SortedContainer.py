@@ -3,8 +3,8 @@ import sortedcontainers
 
 
 class SortedContainer(Template):
-    def __init__(self):
-        self.li = sortedcontainers.SortedList()
+    def __init__(self, li = []):
+        self.li = sortedcontainers.SortedList(li)
 
     def add(self, element):
         self.li.add(element)
