@@ -19,11 +19,15 @@ def time_execution(instance, func, values):
     res = None
     thread_return = {'Time': 0.0}
     def compute(thread_return):
-        start = time.time()
-        for i in values: # do it reverse order so we don't get out of bounds
-            func(instance, i) # We might have to do something with this value to avoid optimizations
-        end = time.time()
-        thread_return['time'] = end - start
+        try:
+            start = time.time()
+            for i in values: # do it reverse order so we don't get out of bounds
+                func(instance, i) # We might have to do something with this value to avoid optimizations
+            end = time.time()
+            thread_return['time'] = end - start
+        except Exception:
+            print(f"{i} {instance.size(instance)}")
+            exit(0)
     p = threading.Thread(target=compute, args=(thread_return,))
     p.start()
 
@@ -47,12 +51,12 @@ def run_benchmark():
             # So results which ran faster than a threshold will get discarded
             # As the measurement error will be too large.
             preload_values = np.random.randint(MININT, MAXINT, 10**n)
-            deletes = 10**n if 10**n < 100000 else 1000000 // n
-            delete_values = [random.randint(0, i - 2) for i in range(2, deletes + 2)] #Potentially move these into functions so they can be garbage cleaned and save ram. Might be a bit much right now
+            deletes = 10**n - 1 if 10**n < 1000000 else 1000000 // n
+            delete_values = [random.randint(0, (len(preload_values) - i)) for i in range(1, deletes)] #Potentially move these into functions so they can be garbage cleaned and save ram. Might be a bit much right now
             for ds in structures:
                 instance = init_structure(ds, preload_values)
                 try:
-                    time_taken = time_execution(instance, instance.delete, reversed(delete_values))
+                    time_taken = time_execution(instance, instance.delete, delete_values)
                 except AssertionError as e:
                     print(f"{ds} Had an AssertionError doing deletion.")
                     continue
