@@ -52,7 +52,7 @@ def run_benchmark():
             for ds in structures:
                 instance = init_structure(ds, preload_values)
                 try:
-                    time_taken = time_execution(instance, instance.delete, reversed(delete_values[:deletes-1]))
+                    time_taken = time_execution(instance, instance.delete, reversed(delete_values))
                 except AssertionError as e:
                     print(f"{ds} Had an AssertionError doing deletion.")
                     continue
@@ -92,7 +92,7 @@ def run_benchmark():
                 instance = init_structure(ds, preload_values)
                 
                 try:
-                    time_taken = time_execution(instance, instance.add, add_values[:adds-1])
+                    time_taken = time_execution(instance, instance.add, add_values)
                 except TimeoutError as e:
                     print(f"{ds} was too slow and was skipped!")
                     continue
