@@ -47,11 +47,12 @@ def run_benchmark():
             # So results which ran faster than a threshold will get discarded
             # As the measurement error will be too large.
             preload_values = np.random.randint(MININT, MAXINT, 10**n)
-            delete_values = [random.randint(0, i - 2) for i in range(2, 10**n + 2)] #Potentially move these into functions so they can be garbage cleaned and save ram. Might be a bit much right now
+            deletes = 10**n if 10**n < 100000 else 1000000 // n
+            delete_values = [random.randint(0, i - 2) for i in range(deletes)] #Potentially move these into functions so they can be garbage cleaned and save ram. Might be a bit much right now
             for ds in structures:
                 instance = init_structure(ds, preload_values)
                 try:
-                    time_taken = time_execution(instance, instance.delete, reversed(delete_values))
+                    time_taken = time_execution(instance, instance.delete, reversed(delete_values[:deletes-1]))
                 except AssertionError as e:
                     print(f"{ds} Had an AssertionError doing deletion.")
                     continue
@@ -62,14 +63,15 @@ def run_benchmark():
                     print(f"{ds} Had an exception doing deletion:\n{e}")
                     traceback.print_exc()
                     continue
-                print(f"{ds} took {time_taken}s for deleting {len(delete_values)} values")
-                write_csv_results(ds, 10**n, "Delete", len(delete_values), time_taken)
+                print(f"{ds} took {time_taken}s for deleting {deletes} values")
+                write_csv_results(ds, 10**n, "Delete", deletes, time_taken)
             del delete_values
 
             for ds in structures: 
                 instance = init_structure(ds, preload_values)
+                removes = 10**n if 10**n < 100000 else 1000000 // n
                 try:
-                    time_taken = time_execution(instance, instance.remove, preload_values)
+                    time_taken = time_execution(instance, instance.remove, preload_values[:removes-1])
                 except AssertionError as e:
                     print(f"{ds} Had an AssertionError doing removal.")
                     continue
@@ -81,19 +83,21 @@ def run_benchmark():
                     traceback.print_exc()
                     continue
 
-                print(f"{ds} took {time_taken}s for removing {len(preload_values)} values")
-                write_csv_results(ds, 10**n, "Remove", len(preload_values), time_taken)
-
-            add_values = [random.randint(MININT,MAXINT) for i in range(10**n)]
+                print(f"{ds} took {time_taken}s for removing {removes} values")
+                write_csv_results(ds, 10**n, "Remove", removes, time_taken)
+            
+            adds = 10**n if 10**n < 100000 else 1000000 // n
+            add_values = [random.randint(MININT,MAXINT) for i in range(adds)]
             for ds in structures:
                 instance = init_structure(ds, preload_values)
+                
                 try:
-                    time_taken = time_execution(instance, instance.add, add_values)
+                    time_taken = time_execution(instance, instance.add, add_values[:adds-1])
                 except TimeoutError as e:
                     print(f"{ds} was too slow and was skipped!")
                     continue
-                print(f"{ds} took {time_taken}s for adding {len(add_values)} value")
-                write_csv_results(ds, 10**n, "Add", len(add_values), time_taken)
+                print(f"{ds} took {time_taken}s for adding {adds} value")
+                write_csv_results(ds, 10**n, "Add", adds, time_taken)
             del add_values
             
             ### NON-DESTRUCTIVE ####
