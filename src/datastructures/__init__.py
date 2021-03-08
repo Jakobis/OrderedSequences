@@ -5,3 +5,4 @@ __all__ = [ basename(f)[:-3] for f in modules if isfile(f) and not f.endswith('_
 structures = __all__.copy()
 structures.remove("Template")
 structures.remove("Basic") # Basic is just far too slow. O(n) on insert.
+structures.remove("RBSTree")
