@@ -48,7 +48,7 @@ def run_benchmark():
             # As the measurement error will be too large.
             preload_values = np.random.randint(MININT, MAXINT, 10**n)
             deletes = 10**n if 10**n < 100000 else 1000000 // n
-            delete_values = [random.randint(0, i - 2) for i in range(deletes)] #Potentially move these into functions so they can be garbage cleaned and save ram. Might be a bit much right now
+            delete_values = [random.randint(0, i - 2) for i in range(2, deletes + 2)] #Potentially move these into functions so they can be garbage cleaned and save ram. Might be a bit much right now
             for ds in structures:
                 instance = init_structure(ds, preload_values)
                 try:
