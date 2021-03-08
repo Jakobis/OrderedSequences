@@ -1,5 +1,6 @@
 from datastructures import structures
 import random, time, gc, threading
+import traceback
 MININT = -2147483648
 MAXINT = 2147483647
 
@@ -53,11 +54,12 @@ def run_benchmark():
                 except AssertionError as e:
                     print(f"{ds} Had an AssertionError doing deletion.")
                     continue
+                except TimeoutError as e:
+                    print(f"{ds} was too slow and was skipped!")
+                    continue
                 except Exception as e:
                     print(f"{ds} Had an exception doing deletion:\n{e}")
-                    continue
-                except TimeoutError as e:
-                    print(f"{ds} Was too slow and was skipped:\n{e}")
+                    traceback.print_exc()
                     continue
                 print(f"{ds} took {time_taken}s for deleting {len(delete_values)} values")
                 write_csv_results(ds, 10**n, "Delete", len(delete_values), time_taken)
@@ -68,15 +70,17 @@ def run_benchmark():
                 try:
                     time_taken = time_execution(instance, instance.remove, preload_values)
                 except AssertionError as e:
-                    print(f"{ds} Had an AssertionError doing deletion.")
+                    print(f"{ds} Had an AssertionError doing removal.")
+                    continue
+                except TimeoutError as e:
+                    print(f"{ds} was too slow and was skipped!")
                     continue
                 except Exception as e:
                     print(f"{ds} Had an exception doing deletion:\n{e}")
+                    traceback.print_exc()
                     continue
-                except TimeoutError as e:
-                    print(f"{ds} Was too slow and was skipped:\n{e}")
-                    continue
-                print(f"{ds} took {time_taken}s for deleting {len(preload_values)} values")
+
+                print(f"{ds} took {time_taken}s for removing {len(preload_values)} values")
                 write_csv_results(ds, 10**n, "Remove", len(preload_values), time_taken)
 
             add_values = [random.randint(MININT,MAXINT) for i in range(10**n)]
@@ -85,7 +89,7 @@ def run_benchmark():
                 try:
                     time_taken = time_execution(instance, instance.add, add_values)
                 except TimeoutError as e:
-                    print(f"{ds} Was too slow and was skipped:\n{e}")
+                    print(f"{ds} was too slow and was skipped!")
                     continue
                 print(f"{ds} took {time_taken}s for adding {len(add_values)} value")
                 write_csv_results(ds, 10**n, "Add", len(add_values), time_taken)
@@ -104,7 +108,7 @@ def run_benchmark():
                         if time_taken < 1:
                             select_values = [random.randint(0, 10**n -1) for i in range(len(select_values) * 2)]
                 except TimeoutError as e:
-                    print(f"{ds} Was too slow and was skipped:\n{e}")
+                    print(f"{ds} was too slow and was skipped!")
                     continue
                 print(f"{ds} took {time_taken}s for selecting {len(select_values)} value")
                 write_csv_results(ds, 10**n, "Select", len(select_values), time_taken)

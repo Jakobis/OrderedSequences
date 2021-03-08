@@ -6,3 +6,4 @@ structures = __all__.copy()
 structures.remove("Template")
 structures.remove("Basic") # Basic is just far too slow. O(n) on insert.
 structures.remove("RBSTree")
+structures.remove("SortedCollection")
