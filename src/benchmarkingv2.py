@@ -123,7 +123,59 @@ def run_benchmark():
                 print(f"{ds} took {time_taken}s for selecting {selects} value")
                 write_csv_results(ds, 10**n, "Select", selects, time_taken)
             del select_values
+
+            rank_values =  [random.choice(preload_values) for i in range(4194304)] # 4 million should be enough
+            for ds in structures:
+                ranks = 64
+                instance = init_structure(ds, preload_values)
+                time_taken = 0
+                try:
+                    while time_taken < 1:
+                        time_taken = time_execution(instance, instance.rank, rank_values[:ranks])
+                        if time_taken < 1:
+                            ranks *= 2
+                except TimeoutError as e:
+                    print(f"{ds} was too slow and was skipped!")
+                    continue
+                print(f"{ds} took {time_taken}s for ranking {ranks} value")
+                write_csv_results(ds, 10**n, "Rank", ranks, time_taken)
+            del rank_values
         
+
+            preload_values.sort() # Just makes it easier from after this
+            successor_values =  [random.choice(preload_values[1:-1]) for i in range(4194304)] # 4 million should be enough
+            for ds in structures:
+                successors = 64
+                instance = init_structure(ds, preload_values)
+                time_taken = 0
+                try:
+                    while time_taken < 1:
+                        time_taken = time_execution(instance, instance.successor, successor_values[:successors])
+                        if time_taken < 1:
+                            successors *= 2
+                except TimeoutError as e:
+                    print(f"{ds} was too slow and was skipped!")
+                    continue
+                print(f"{ds} took {time_taken}s for successor {successors} value")
+                write_csv_results(ds, 10**n, "Successor", successors, time_taken)
+
+            # We can just reuse the choices from before
+            for ds in structures:
+                predessors = 64
+                instance = init_structure(ds, preload_values)
+                time_taken = 0
+                try:
+                    while time_taken < 1:
+                        time_taken = time_execution(instance, instance.predecessor, successor_values[:predessors])
+                        if time_taken < 1:
+                            predessors *= 2
+                except TimeoutError as e:
+                    print(f"{ds} was too slow and was skipped!")
+                    continue
+                print(f"{ds} took {time_taken}s for predecessor {predessors} value")
+                write_csv_results(ds, 10**n, "Predecessor", predessors, time_taken)
+            del successor_values
+
             f.flush()
             gc.collect()
 
