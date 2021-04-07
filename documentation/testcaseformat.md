@@ -1,9 +1,7 @@
 # Test Case Format Definition
 This documents contains the format definition for Test Case input and output
 
-**TODO: Explain that no input are allowed to lead to exceptional cases, no ranks of values that have not been added**
-
-Input may not be malformed.
+Input may not be malformed and lead to undefined behavior. So you cant get the rank of value which does not exist, and successor of the last value.
 
 .in files starts with number of lines *n*
 
