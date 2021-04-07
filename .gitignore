@@ -10,6 +10,8 @@ __pycache__/
 *large.out
 /results
 *.csv
+**/venv
+**/.idea
 
 # User-specific stuff
 .idea/**/workspace.xml

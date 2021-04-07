@@ -6892,6 +6892,30 @@ py_blist_insert(PyBList *self, PyObject *args)
 }
 
 BLIST_PYAPI(PyObject *)
+py_blist_addtest(PyBList *self, PyObject *args)
+{
+    PyObject *v;
+    PyBList *overflow;
+    int err;
+
+    invariants(self, VALID_USER|VALID_RW);
+
+    DANGER_BEGIN;
+    err = PyArg_ParseTuple(args, "O:add", &v);
+    DANGER_END;
+    if (!err)
+        return _ob(NULL);
+
+    if (self->n == PY_SSIZE_T_MAX) {
+        PyErr_SetString(PyExc_OverflowError,
+                        "cannot add more objects to list");
+        return _ob(NULL);
+    }
+    printf("Hello from C, %i", *v);
+    Py_RETURN_NONE;
+}
+
+BLIST_PYAPI(PyObject *)
 py_blist_append(PyBList *self, PyObject *v)
 {
         int err;
@@ -7132,8 +7156,8 @@ static PyMethodDef blist_methods[] = {
         {"remove",      (PyCFunction)py_blist_remove,  METH_O, remove_doc},
         {"index",       (PyCFunction)py_blist_index,   METH_VARARGS, index_doc},
         {"clear",       (PyCFunction)py_blist_clear,   METH_NOARGS, clear_doc},
-        {"copy",       (PyCFunction)py_blist_copy,   METH_NOARGS, copy_doc},
-
+        {"copy",        (PyCFunction)py_blist_copy,   METH_NOARGS, copy_doc},
+        {"addtest",     (PyCFunction)py_blist_addtest,   METH_VARARGS, count_doc},
         {"count",       (PyCFunction)py_blist_count,   METH_O, count_doc},
         {"reverse",     (PyCFunction)py_blist_reverse, METH_NOARGS, reverse_doc},
         {"sort",        (PyCFunction)py_blist_sort,    METH_VARARGS | METH_KEYWORDS, sort_doc},

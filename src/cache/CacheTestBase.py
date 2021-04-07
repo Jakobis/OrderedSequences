@@ -10,3 +10,4 @@ if sys.argv[1][0] == 'b':
 else:
     l = sortedcontainers.SortedList([i for i in range(10**N)])
 
+print(len(l))

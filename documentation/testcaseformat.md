@@ -14,6 +14,5 @@ Input may not be malformed.
 | Remove by value | re and 1 int | `re 161`      | None                                              |
 | Rank by value   | r and 1 int  | `r 41`        | Rank of value                                     |
 | Select by index | s and 1 int  | `s 61`        | Value at index                                    |
-| Sum             | sum          | `sum`         | Sum of all values                                 |
 | Successor       | su and 1 int | `su 125`      | Value of next different value. Can't be last      |
 | Predecessor     | pr and 1 int | `pr 2140`     | Value of previous different value. Can't be first |

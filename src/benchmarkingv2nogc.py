@@ -49,7 +49,8 @@ N = 8
 
 
 def run_benchmark():
-    with open("../results/timings/n_res.csv", "w") as f:
+    gc.disable()
+    with open("../results/timings/n_res_nogc.csv", "w") as f:
         def write_csv_results(ds, n, op, num_ops, time_taken):
             f.write(f"{ds},{n},{op},{num_ops},{time_taken}\n")
         write_csv_results("DS", "Size", "Op", "OpCount", "Time(s)")
@@ -81,7 +82,7 @@ def run_benchmark():
                 print(f"{ds} took {time_taken}s for deleting {deletes} values")
                 write_csv_results(ds, 10**n, "Delete", deletes, time_taken)
             del delete_values
-        
+        gc.collect()
         for n in range(4, N):
             for ds in structures: 
                 preload_values = l_preload_values[:10**n]
@@ -102,6 +103,7 @@ def run_benchmark():
 
                 print(f"{ds} took {time_taken}s for removing {removes} values")
                 write_csv_results(ds, 10**n, "Remove", removes, time_taken)
+        gc.collect()
         
         for n in range(4, N):
             preload_values = l_preload_values[:10**n]
@@ -118,6 +120,7 @@ def run_benchmark():
                 print(f"{ds} took {time_taken}s for adding {adds} value")
                 write_csv_results(ds, 10**n, "Add", adds, time_taken)
             del add_values
+        gc.collect()
         
         ### NON-DESTRUCTIVE ####
         # These methods should not modify the data structure
@@ -140,6 +143,7 @@ def run_benchmark():
                 print(f"{ds} took {time_taken}s for selecting {selects} value")
                 write_csv_results(ds, 10**n, "Select", selects, time_taken)
             del select_values
+        gc.collect()
 
         rank_values =  [random.choice(preload_values) for i in range(4194304)] # 4 million should be enough
         for n in range(4, N):
@@ -160,6 +164,7 @@ def run_benchmark():
                 write_csv_results(ds, 10**n, "Rank", ranks, time_taken)
             del rank_values
     
+        gc.collect()
 
         preload_values.sort() # Just makes it easier from after this
         successor_values =  [random.choice(preload_values[1:-1]) for i in range(4194304)] # 4 million should be enough
@@ -179,6 +184,7 @@ def run_benchmark():
                     continue
                 print(f"{ds} took {time_taken}s for successor {successors} value")
                 write_csv_results(ds, 10**n, "Successor", successors, time_taken)
+        gc.collect()
 
         # We can just reuse the choices from before
         for n in range(4, N):
@@ -198,6 +204,7 @@ def run_benchmark():
                 print(f"{ds} took {time_taken}s for predecessor {predessors} value")
                 write_csv_results(ds, 10**n, "Predecessor", predessors, time_taken)
             del successor_values
+        gc.collect()
 
         f.flush()
         gc.collect()
