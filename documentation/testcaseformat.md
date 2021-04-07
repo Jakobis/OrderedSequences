@@ -1,7 +1,7 @@
 # Test Case Format Definition
 This documents contains the format definition for Test Case input and output
 
-Input may not be malformed and lead to undefined behavior. So you cant get the rank of value which does not exist, and successor of the last value.
+Input may not be malformed and lead to undefined behavior. So you cant get the rank of value which does not exist, and successor of the last value. Duplicate values are allowed.
 
 .in files starts with number of lines *n*
 
