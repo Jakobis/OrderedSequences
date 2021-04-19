@@ -1,6 +1,7 @@
 from datastructures import structures
 import random, time, gc, threading
 import traceback
+import pathlib
 import numpy as np
 MININT = -2147483648
 MAXINT = 2147483647
@@ -49,6 +50,7 @@ N = 8
 
 
 def run_benchmark():
+    pathlib.Path('../results/timings/').mkdir(parents=True, exist_ok=True) 
     with open("../results/timings/n_res.csv", "w") as f:
         def write_csv_results(ds, n, op, num_ops, time_taken):
             f.write(f"{ds},{n},{op},{num_ops},{time_taken}\n")
