@@ -23,3 +23,7 @@ class Template:
         raise NotImplementedError
     def size(self):
         raise NotImplementedError
+    def __len__(self):
+        raise NotImplementedError
+    def __getitem__(self, key):
+        raise NotImplementedError

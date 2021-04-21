@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from adjustText import adjust_text
 import pandas as pd
 from scipy import stats
+markers=['o', '^', 's', 'D', 'x']
 
 def createplotforoperation(op, data):
     plt.cla()
@@ -14,18 +15,19 @@ def createplotforoperation(op, data):
     df['Avg(ms)'] = (df['Time(s)'] / df['OpCount']) * 1000
     print(df)
     texts = []
+    i = 0
     for name in pd.unique(df['DS']):
         dfn = df[df['DS'] == name]
         x = list(dfn['Size'])
         y = list(dfn['Avg(ms)'])
-        p = plt.plot(x, y, label=name)
+        p = plt.plot(x, y, label=name, marker=markers[i])
+        i += 1
         texts.append(plt.annotate(f'{name}', (x[-1], y[-1] ), color = p[0].get_color()))
         
     plt.yscale('log')
     plt.xscale('log')
-    plt.xlabel('Size')
-    plt.ylabel('Average time in ms')
-    plt.title(f'Average time taken for operation {op}')
+    plt.xlabel('Initial elements')
+    plt.ylabel('Average time (ms)')
     plt.grid(True, which="both", linestyle='--')
     #adjust_text(texts, only_move={'points':'y', 'texts':'y'}, arrowprops=dict(arrowstyle="->", color='r', lw=0.5))
     #adjust_text(texts, autoalign=y, avoid_points=False,  only_move={'points':'y', 'texts':'y'})

@@ -43,6 +43,12 @@ class SortedArray(Template):
     def size(self):
         return len(self.li)
 
+    def __len__(self):
+        return self.size()
+    
+    def __getitem__(self, key):
+        return self.select(key)
+
 
 ### Array modification of SortedList hereon ###
 
