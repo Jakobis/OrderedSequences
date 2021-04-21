@@ -190,7 +190,7 @@ class SortedList(MutableSequence):
     not-implemented error.
 
     """
-    DEFAULT_LOAD_FACTOR = 1000
+    DEFAULT_LOAD_FACTOR = 200
 
     def __init__(self, iterable=None, key=None):
         """Initialize sorted list instance.
@@ -466,12 +466,12 @@ class SortedList(MutableSequence):
             self._delete(pos, idx)
 
     def check_resize(self):
-        _listlen = len(self._lists)
+        siz = self.__len__()
         _load = self._load
-        if _load > self.DEFAULT_LOAD_FACTOR and _listlen < _load >> 1:
-            self._reset(_load >> 1)
-        elif _listlen > _load << 1:
-            self._reset(_load << 1)
+        if siz > _load ** 3:
+            self._reset(_load >> 2)
+        elif (_load << 2) > self.DEFAULT_LOAD_FACTOR and siz > (_load << 2) ** 3:
+            self._reset(_load << 2)
 
     def remove(self, value):
         """Remove `value` from sorted list; `value` must be a member.

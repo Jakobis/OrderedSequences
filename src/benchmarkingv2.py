@@ -1,7 +1,7 @@
 from datastructures import structures
 import random, time, gc, threading
 import traceback
-import pathlib
+import pathlib, sys
 import numpy as np
 MININT = -2147483648
 MAXINT = 2147483647
@@ -49,9 +49,9 @@ def time_execution(instance, func, values):
 N = 8
 
 
-def run_benchmark():
+def run_benchmark(filename):
     pathlib.Path('../results/timings/').mkdir(parents=True, exist_ok=True) 
-    with open("../results/timings/n_res.csv", "w") as f:
+    with open("../results/timings/{filename}.csv", "w") as f:
         def write_csv_results(ds, n, op, num_ops, time_taken):
             f.write(f"{ds},{n},{op},{num_ops},{time_taken}\n")
         write_csv_results("DS", "Size", "Op", "OpCount", "Time(s)")
@@ -124,9 +124,9 @@ def run_benchmark():
         ### NON-DESTRUCTIVE ####
         # These methods should not modify the data structure
         # and can therefore be called until they took at least 1 second to run.
-        select_values =  [np.random.randint(0, 10**n -1) for i in range(4194304)] # 4 million should be enough
         for n in range(4, N):
             preload_values = l_preload_values[:10**n]
+            select_values =  [np.random.randint(0, len(preload_values)) for i in len(4194304)]# 4 million should be enough
             for ds in structures:
                 selects = 64
                 instance = init_structure(ds, preload_values)
@@ -205,4 +205,4 @@ def run_benchmark():
         gc.collect()
 
 if __name__ == "__main__":
-    run_benchmark()
+    run_benchmark(sys.argv[1])
