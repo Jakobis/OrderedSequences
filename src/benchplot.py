@@ -6,7 +6,7 @@ import pandas as pd
 from scipy import stats
 markers=['o', '^', 's', 'D', 'x']
 
-def createplotforoperation(op, data):
+def createplotforoperation(op, data, inter):
     plt.cla()
     plt.clf()
     df = pd.DataFrame(data[data["Op"] == op])
@@ -74,14 +74,15 @@ def createplotforoperation(op, data):
     #plt.gcf().set_size_inches(10, 6)
 
     #plt.title(f'Median runtimes for operation "{optoprettytitle(op)}" over N')
-    #pathlib.Path('../results/graphs/').mkdir(parents=True, exist_ok=True) 
-    plt.savefig(f'../results/graphs/{op}.png')
+    pathlib.Path(f'../results/graphs_{inter}').mkdir(parents=True, exist_ok=True) 
+    plt.savefig(f'../results/graphs_{inter}/{op}.png')
 
     #plt.show()
 
 if __name__ == '__main__':
-    data = pd.read_csv(f"../results/timings/n_res.csv")
-    ops = list(pd.unique(data["Op"]))
-    for op in ops:
-        createplotforoperation(op, data)
+    for l in ['cpython', 'pypy']:
+        data = pd.read_csv(f"../results/timings/{l}_res.csv")
+        ops = list(pd.unique(data["Op"]))
+        for op in ops:
+            createplotforoperation(op, data, l)
     #createplotforoperation("Successor", data)
