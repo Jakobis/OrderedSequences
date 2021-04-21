@@ -469,9 +469,9 @@ class SortedList(MutableSequence):
         siz = self.__len__()
         _load = self._load
         if siz > _load ** 3:
-            self._reset(_load >> 1)
-        elif (_load << 1) > self.DEFAULT_LOAD_FACTOR and siz < (_load << 1) ** 3:
             self._reset(_load << 1)
+        elif (_load >> 1) > self.DEFAULT_LOAD_FACTOR and siz < (_load >> 1) ** 3:
+            self._reset(_load >> 1)
 
     def remove(self, value):
         """Remove `value` from sorted list; `value` must be a member.
