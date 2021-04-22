@@ -126,7 +126,7 @@ def run_benchmark(filename):
         # and can therefore be called until they took at least 1 second to run.
         for n in range(4, N):
             preload_values = l_preload_values[:10**n]
-            select_values =  [np.random.randint(0, len(preload_values)) for i in len(4194304)]# 4 million should be enough
+            select_values =  [np.random.randint(0, len(preload_values)) for i in range(4194304)]# 4 million should be enough
             for ds in structures:
                 selects = 64
                 instance = init_structure(ds, preload_values)
