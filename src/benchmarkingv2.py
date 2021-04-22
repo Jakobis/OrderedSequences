@@ -83,7 +83,7 @@ def run_benchmark(filename):
                 print(f"{ds} took {time_taken}s for deleting {deletes} values")
                 write_csv_results(ds, 10**n, "Delete", deletes, time_taken)
             del delete_values
-        
+        f.flush()
         for n in range(4, N):
             for ds in structures: 
                 preload_values = l_preload_values[:10**n]
@@ -104,7 +104,7 @@ def run_benchmark(filename):
 
                 print(f"{ds} took {time_taken}s for removing {removes} values")
                 write_csv_results(ds, 10**n, "Remove", removes, time_taken)
-        
+        f.flush()
         for n in range(4, N):
             preload_values = l_preload_values[:10**n]
             adds = 10**n if 10**n < 100000 else 1000000 // n
@@ -120,7 +120,7 @@ def run_benchmark(filename):
                 print(f"{ds} took {time_taken}s for adding {adds} value")
                 write_csv_results(ds, 10**n, "Add", adds, time_taken)
             del add_values
-        
+        f.flush()
         ### NON-DESTRUCTIVE ####
         # These methods should not modify the data structure
         # and can therefore be called until they took at least 1 second to run.
@@ -142,7 +142,7 @@ def run_benchmark(filename):
                 print(f"{ds} took {time_taken}s for selecting {selects} value")
                 write_csv_results(ds, 10**n, "Select", selects, time_taken)
             del select_values
-
+        f.flush()
         rank_values =  [random.choice(preload_values) for i in range(4194304)] # 4 million should be enough
         for n in range(4, N):
             preload_values = l_preload_values[:10**n]
@@ -162,7 +162,7 @@ def run_benchmark(filename):
                 write_csv_results(ds, 10**n, "Rank", ranks, time_taken)
             del rank_values
     
-
+        f.flush()
         preload_values.sort() # Just makes it easier from after this
         successor_values =  [random.choice(preload_values[1:-1]) for i in range(4194304)] # 4 million should be enough
         for n in range(4, N):
@@ -181,7 +181,7 @@ def run_benchmark(filename):
                     continue
                 print(f"{ds} took {time_taken}s for successor {successors} value")
                 write_csv_results(ds, 10**n, "Successor", successors, time_taken)
-
+        f.flush()
         # We can just reuse the choices from before
         for n in range(4, N):
             preload_values = l_preload_values[:10**n]
