@@ -46,12 +46,12 @@ def time_execution(instance, func, values):
     end = time.time()
     return end - start
 
-N = 9
+N = 8
 
 
 def run_benchmark(filename):
     pathlib.Path('../results/timings/').mkdir(parents=True, exist_ok=True) 
-    with open("../results/timings/{filename}.csv", "w") as f:
+    with open(f"../results/timings/{filename}.csv", "w") as f:
         def write_csv_results(ds, n, op, num_ops, time_taken):
             f.write(f"{ds},{n},{op},{num_ops},{time_taken}\n")
         write_csv_results("DS", "Size", "Op", "OpCount", "Time(s)")
@@ -142,10 +142,12 @@ def run_benchmark(filename):
                 print(f"{ds} took {time_taken}s for selecting {selects} value")
                 write_csv_results(ds, 10**n, "Select", selects, time_taken)
             del select_values
-        f.flush()
-        rank_values =  [random.choice(preload_values) for i in range(4194304)] # 4 million should be enough
+        f.flush()  
+         # 4 million should be enough
         for n in range(4, N):
             preload_values = l_preload_values[:10**n]
+            
+            rank_values =  [random.choice(preload_values) for i in range(4194304)]
             for ds in structures:
                 ranks = 64
                 instance = init_structure(ds, preload_values)
@@ -163,10 +165,10 @@ def run_benchmark(filename):
             del rank_values
     
         f.flush()
-        preload_values.sort() # Just makes it easier from after this
-        successor_values =  [random.choice(preload_values[1:-1]) for i in range(4194304)] # 4 million should be enough
+        l_preload_values.sort() # Just makes it easier from after this
         for n in range(4, N):
             preload_values = l_preload_values[:10**n]
+            successor_values =  [random.choice(preload_values[1:-1]) for i in range(4194304)] # 4 million should be enough
             for ds in structures:
                 successors = 64
                 instance = init_structure(ds, preload_values)
@@ -185,13 +187,14 @@ def run_benchmark(filename):
         # We can just reuse the choices from before
         for n in range(4, N):
             preload_values = l_preload_values[:10**n]
+            predecessor_values =  [random.choice(preload_values[1:-1]) for i in range(4194304)] # 4 million should be enough
             for ds in structures:
                 predessors = 64
                 instance = init_structure(ds, preload_values)
                 time_taken = 0
                 try:
                     while time_taken < 1:
-                        time_taken = time_execution(instance, instance.predecessor, successor_values[:predessors])
+                        time_taken = time_execution(instance, instance.predecessor, predecessor_values[:predessors])
                         if time_taken < 1:
                             predessors *= 2
                 except TimeoutError as e:
@@ -199,7 +202,7 @@ def run_benchmark(filename):
                     continue
                 print(f"{ds} took {time_taken}s for predecessor {predessors} value")
                 write_csv_results(ds, 10**n, "Predecessor", predessors, time_taken)
-            del successor_values
+            del predecessor_values
 
         f.flush()
         gc.collect()
