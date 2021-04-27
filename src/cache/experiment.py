@@ -12,6 +12,7 @@ for d in ['SortedList', 'SortedArray', 'Blist', 'AutoLoad', 'SkipList']:
     for i in range(4, 8):
         for o in ['Base', 'Add', 'Select', 'Delete']:
             if os.path.isfile(f"../../results/cache/{d}.{o}.{10 ** i}"):
+                print(f"Skipped {d}.{o}")
                 continue
             os.system(f"valgrind --tool=cachegrind --cachegrind-out-file=../../results/cache/{d}.{o}.{10 ** i} python3.7 CacheTest.py {d} {i} {o}")
             if o != 'Base':
