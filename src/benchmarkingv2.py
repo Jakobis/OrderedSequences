@@ -46,7 +46,7 @@ def time_execution(instance, func, values):
     end = time.time()
     return end - start
 
-N = 8
+N = 6
 
 
 def run_benchmark(filename):
@@ -208,4 +208,5 @@ def run_benchmark(filename):
         gc.collect()
 
 if __name__ == "__main__":
+    structures = ['RBSTree']
     run_benchmark(sys.argv[1])
