@@ -23,9 +23,9 @@ class RBSTree(Template):
     def count(self, element):
         return self.li.get(element)
     def successor(self, value):
-        return self.li.successor(value)
+        return self.li.floor(value + 1)
     def predecessor(self, value):
-        return self.li.predecessor(value)
+        return self.li.ceiling(value - 1)
     def size(self):
         return self.li.size()
 

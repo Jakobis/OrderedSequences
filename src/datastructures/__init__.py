@@ -8,7 +8,7 @@ structures.remove("Template")
 structures.remove("Basic") # Basic is just far too slow. O(n) on insert.
 #structures.remove("RBSTree")
 structures.remove("SortedCollection")
-structures.remove("SortedBadBisect")
+#structures.remove("SortedBadBisect")
 if "PyPy" in platform.python_implementation():
     structures.remove("Blist") #BList does not work in pypy
     print("Not Testing BList as it is not supported in PyPy")

@@ -46,7 +46,7 @@ def time_execution(instance, func, values):
     end = time.time()
     return end - start
 
-N = 6
+N = 8
 
 
 def run_benchmark(filename):
@@ -61,7 +61,7 @@ def run_benchmark(filename):
         # We don't have a good way of measuring these under small n
         # So results which ran faster than a threshold will get discarded
         # As the measurement error will be too large.
-        l_preload_values = np.random.randint(MININT, MAXINT, 10**N)
+        l_preload_values = random.sample(range(MININT, MAXINT), 10**N)
         for n in range(4, N):
             preload_values = l_preload_values[:10**n]
             deletes = 10**n - 1 if 10**n < 1000000 else 1000000 // n
@@ -208,5 +208,5 @@ def run_benchmark(filename):
         gc.collect()
 
 if __name__ == "__main__":
-    structures = ['RBSTree']
+    structures = ['SortedBadBisect']
     run_benchmark(sys.argv[1])
