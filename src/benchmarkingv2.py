@@ -61,7 +61,7 @@ def run_benchmark(filename):
         # We don't have a good way of measuring these under small n
         # So results which ran faster than a threshold will get discarded
         # As the measurement error will be too large.
-        l_preload_values = random.sample(range(MININT, MAXINT), 10**N)
+        l_preload_values = random.sample(range(MININT, MAXINT // 2), 10**N) # Limit the range so we can use it for adds without duplicates
         for n in range(4, N):
             preload_values = l_preload_values[:10**n]
             deletes = 10**n - 1 if 10**n < 1000000 else 1000000 // n
@@ -108,7 +108,7 @@ def run_benchmark(filename):
         for n in range(4, N):
             preload_values = l_preload_values[:10**n]
             adds = 10**n if 10**n < 100000 else 1000000 // n
-            add_values = [random.randint(MININT,MAXINT) for i in range(adds)]
+            add_values = [random.randint(MAXINT // 2 + 1, MAXINT) for i in range(adds)]
             for ds in structures:
                 instance = init_structure(ds, preload_values)
                 
