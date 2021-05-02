@@ -8,13 +8,13 @@ def write_csv_results(ds, n, op, num_ops, cache, misses):
 if not fileexisted:
     write_csv_results("DS", "Size", "Op", "OpCount", "Cache", "Misses")
 
-for d in ['BadBisect', 'RBSTree', 'SortedList', 'SortedArray', 'Blist', 'AutoLoad', 'SkipList']:
+for d in ['BadBisect', 'SortedList', 'SortedArray', 'AutoLoad', 'Blist', 'RBSTree', 'SkipList']:
     for i in range(4, 7):
         for o in ['Base', 'Add', 'Select', 'Delete']:
             if os.path.isfile(f"../../results/cache/{d}.{o}.{10 ** i}"):
                 print(f"Skipped {d}.{o}")
                 continue
-            os.system(f'valgrind --tool=cachegrind --cachegrind-out-file=../../results/cache/{d}.{o}.{10 ** i} python3.7 CacheTest.py {d} {i} {o} >> res/{d}.res')
+            os.system(f'valgrind --tool=cachegrind --cachegrind-out-file=../../results/cache/{d}.{o}.{10 ** i} python3.7 CacheTest.py {d} {i} {o} >> res/{d}.res 2>&1')
             if o != 'Base':
                 os.system(f"cg_diff ../../results/cache/{d}.Base.{10 ** i} ../../results/cache/{d}.{o}.{10 ** i} > ../../results/cache/{d}.{o}.{10 ** i}.Diff")
                 proc = subprocess.Popen(['cg_annotate',f'../../results/cache/{d}.{o}.{10 ** i}.Diff'],stdout=subprocess.PIPE)
