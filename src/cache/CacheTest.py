@@ -36,31 +36,31 @@ if sys.argv[3] == 'Base':
     pass
 elif sys.argv[3] == 'Add':
     if sys.argv[1] == 'SkipList':
-        for i in range(1, 10**4): #No duplicates
+        for i in range(1, 10**N): #No duplicates
             l.insert(-i, -i)
     elif sys.argv[1] == 'RBSTree':
-        for i in range(1, 10**4):
+        for i in range(1, 10**N):
             l.put(-i, 1)
     else:
-        for i in range(1, 10**4):
+        for i in range(1, 10**N):
             l.add(-i)
 elif sys.argv[3] == 'Select':
     ans = 0
     if sys.argv[1] == 'SkipList':
-        for i in range(10**4):
+        for i in range(10**N):
             ans += l[i][0]
     elif sys.argv[1] == 'RBSTree':
-        for i in range(1, 10**4):
+        for i in range(10**N):
             ans += l.select(i)
     else:
-        for i in range(10**4):
+        for i in range(10**N):
             ans += l[i]
 elif sys.argv[3] == 'Delete':
     if sys.argv[1] == 'RBSTree':
-        for i in range(1, 10**4):
+        for i in range(10**N - 1, 0, -1):
             l.delete(i)
     else:
-        for i in range(10**4 - 1, 0, -1):
+        for i in range(10**N - 1, 0, -1):
             del l[i]
     
 else:

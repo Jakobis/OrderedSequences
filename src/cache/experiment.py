@@ -8,9 +8,9 @@ def write_csv_results(ds, n, op, num_ops, cache, misses):
 if not fileexisted:
     write_csv_results("DS", "Size", "Op", "OpCount", "Cache", "Misses")
 
-for d in ['BadBisect', 'SortedList', 'SortedArray', 'AutoLoad', 'Blist', 'RBSTree', 'SkipList']:
-    for i in range(4, 7):
-        for o in ['Base', 'Add', 'Select', 'Delete']:
+for i in range(4, 8):
+    for o in ['Base', 'Add', 'Select', 'Delete']:
+        for d in ['BadBisect', 'SortedList', 'SortedArray', 'AutoLoad', 'Blist', 'RBSTree', 'SkipList']:
             if os.path.isfile(f"../../results/cache/{d}.{o}.{10 ** i}"):
                 print(f"Skipped {d}.{o}")
                 continue
@@ -23,5 +23,5 @@ for d in ['BadBisect', 'SortedList', 'SortedArray', 'AutoLoad', 'Blist', 'RBSTre
                 caches = l[13].decode("utf-8").split()
                 misses = l[15].decode("utf-8").split()
                 for v in range(0, 9):
-                    write_csv_results(d, 10 ** i, o, 10**4, caches[v], misses[v].replace(',',''))
+                    write_csv_results(d, 10 ** i, o, 10**i, caches[v], misses[v].replace(',',''))
                 proc.kill()

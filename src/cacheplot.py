@@ -2,7 +2,7 @@ import pathlib
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-markers=['o', '^', 's', 'D', 'x']
+markers=['o', '^', 's', 'D', 'x', '1', '|']
 
 def createplotforoperation(op, data):
     plt.cla()
