@@ -208,5 +208,5 @@ def run_benchmark(filename):
         gc.collect()
 
 if __name__ == "__main__":
-    structures = ['SortedBadBisect']
+    print(f"Testing structures: {structures}")
     run_benchmark(sys.argv[1])
