@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 import math
 import pandas as pd
-markers=['o', '^', 's', 'D', 'x']
+markers=['o', '^', 's', 'D', 'x', '1', '|']
 
 def createplotforoperation(op, data, inter):
     plt.cla()
@@ -24,7 +24,7 @@ def createplotforoperation(op, data, inter):
         p = plt.plot(x, y, label=name, marker=markers[i])
         i += 1
         texts.append(plt.annotate(f'{name}', (x[-1], y[-1] ), color = p[0].get_color()))
-    #plt.yscale('log')
+    plt.yscale('log') #Vi skal lige vælge om det er log eller ej
     plt.xscale('log')
     plt.xlabel('Initial elements')
     plt.ylabel('Average time (µs)')
