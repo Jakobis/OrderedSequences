@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 markers=['o', '^', 's', 'D', 'x', '1', '|']
 
-def createplotforoperation(op, data):
+def createplotforoperation(op, data, cac):
     plt.cla()
     plt.clf()
     df = pd.DataFrame(data[data["Op"] == op])
@@ -12,7 +12,7 @@ def createplotforoperation(op, data):
     texts = []
     i = 0
     for name in pd.unique(df['DS']):
-        dfn = df[(df['DS'] == name) & (df['Cache'] == "DLmr")]
+        dfn = df[(df['DS'] == name) & (df['Cache'] == cac)]
         print(dfn)
         x = list(dfn['Size'])
         y = list(dfn['Misses'])
@@ -47,6 +47,7 @@ def createplotforoperation(op, data):
         mi.xy = (mi._x, mi._y)
         ma.xy = (ma._x, ma._y)
     #texts[0].set_y(texts[0].xy[1] + texts[0].xy[1] / 5)
+    plt.title(f'Cache misses for operation "{op}" over N in cache {cac}')
     plt.legend(loc="upper left")
     plt.margins(x=0)
     plt.tight_layout()
@@ -69,9 +70,9 @@ def createplotforoperation(op, data):
     # Resize plot figure
     #plt.gcf().set_size_inches(10, 6)
 
-    #plt.title(f'Median runtimes for operation "{optoprettytitle(op)}" over N')
+    
     pathlib.Path(f'../results/graphs_cache').mkdir(parents=True, exist_ok=True) 
-    plt.savefig(f'../results/graphs_cache/{op}.png')
+    plt.savefig(f'../results/graphs_cache/{op}_{cac}.png')
 
     #plt.show()
 
@@ -79,5 +80,6 @@ if __name__ == '__main__':
     data = pd.read_csv(f"../results/cache/cache.csv")
     ops = list(pd.unique(data["Op"]))
     for op in ops:
-        createplotforoperation(op, data)
+        for cac in list(pd.unique(data["Cache"])):
+            createplotforoperation(op, data, cac)
     #createplotforoperation("Successor", data)
