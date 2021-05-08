@@ -1,366 +1,396 @@
-==12928== Cachegrind, a cache and branch-prediction profiler
-==12928== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
-==12928== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==12928== Command: python3.7 CacheTest.py Blist 4 Base
-==12928== 
---12928-- warning: L3 cache found, using its data for the LL simulation.
---12928-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
---12928-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
+==51== Cachegrind, a cache and branch-prediction profiler
+==51== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
+==51== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==51== Command: python3.7 CacheTest.py Blist 4 Base
+==51== 
+--51-- warning: L3 cache found, using its data for the LL simulation.
+--51-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
+--51-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
 Testing Blist
 10000
 Succeeded on Base
-==12928== 
-==12928== I   refs:      996,976,384
-==12928== I1  misses:      1,452,830
-==12928== LLi misses:         13,135
-==12928== I1  miss rate:        0.15%
-==12928== LLi miss rate:        0.00%
-==12928== 
-==12928== D   refs:      412,751,392  (283,296,300 rd   + 129,455,092 wr)
-==12928== D1  misses:      3,071,376  (  2,675,845 rd   +     395,531 wr)
-==12928== LLd misses:        136,001  (     29,314 rd   +     106,687 wr)
-==12928== D1  miss rate:         0.7% (        0.9%     +         0.3%  )
-==12928== LLd miss rate:         0.0% (        0.0%     +         0.1%  )
-==12928== 
-==12928== LL refs:         4,524,206  (  4,128,675 rd   +     395,531 wr)
-==12928== LL misses:         149,136  (     42,449 rd   +     106,687 wr)
-==12928== LL miss rate:          0.0% (        0.0%     +         0.1%  )
-==12954== Cachegrind, a cache and branch-prediction profiler
-==12954== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
-==12954== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==12954== Command: python3.7 CacheTest.py Blist 4 Add
-==12954== 
---12954-- warning: L3 cache found, using its data for the LL simulation.
---12954-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
---12954-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
+==51== 
+==51== I   refs:      1,027,244,454
+==51== I1  misses:        1,448,464
+==51== LLi misses:           13,142
+==51== I1  miss rate:          0.14%
+==51== LLi miss rate:          0.00%
+==51== 
+==51== D   refs:        417,646,190  (288,207,492 rd   + 129,438,698 wr)
+==51== D1  misses:        2,869,964  (  2,480,787 rd   +     389,177 wr)
+==51== LLd misses:          136,009  (     29,315 rd   +     106,694 wr)
+==51== D1  miss rate:           0.7% (        0.9%     +         0.3%  )
+==51== LLd miss rate:           0.0% (        0.0%     +         0.1%  )
+==51== 
+==51== LL refs:           4,318,428  (  3,929,251 rd   +     389,177 wr)
+==51== LL misses:           149,151  (     42,457 rd   +     106,694 wr)
+==51== LL miss rate:            0.0% (        0.0%     +         0.1%  )
+==53== Cachegrind, a cache and branch-prediction profiler
+==53== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
+==53== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==53== Command: python3.7 CacheTest.py Blist 4 Add
+==53== 
+--53-- warning: L3 cache found, using its data for the LL simulation.
+--53-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
+--53-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
 Testing Blist
 10000
 Succeeded on Add
-==12954== 
-==12954== I   refs:      1,949,580,196
-==12954== I1  misses:        1,683,501
-==12954== LLi misses:           13,138
-==12954== I1  miss rate:          0.09%
-==12954== LLi miss rate:          0.00%
-==12954== 
-==12954== D   refs:        826,485,983  (563,228,804 rd   + 263,257,179 wr)
-==12954== D1  misses:        4,136,143  (  3,587,097 rd   +     549,046 wr)
-==12954== LLd misses:          142,021  (     29,315 rd   +     112,706 wr)
-==12954== D1  miss rate:           0.5% (        0.6%     +         0.2%  )
-==12954== LLd miss rate:           0.0% (        0.0%     +         0.0%  )
-==12954== 
-==12954== LL refs:           5,819,644  (  5,270,598 rd   +     549,046 wr)
-==12954== LL misses:           155,159  (     42,453 rd   +     112,706 wr)
-==12954== LL miss rate:            0.0% (        0.0%     +         0.0%  )
-==12989== Cachegrind, a cache and branch-prediction profiler
-==12989== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
-==12989== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==12989== Command: python3.7 CacheTest.py Blist 4 Select
-==12989== 
---12989-- warning: L3 cache found, using its data for the LL simulation.
---12989-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
---12989-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
+==53== 
+==53== I   refs:      1,890,263,300
+==53== I1  misses:        1,683,327
+==53== LLi misses:           13,143
+==53== I1  miss rate:          0.09%
+==53== LLi miss rate:          0.00%
+==53== 
+==53== D   refs:        817,245,183  (553,984,535 rd   + 263,260,648 wr)
+==53== D1  misses:        4,202,696  (  3,649,066 rd   +     553,630 wr)
+==53== LLd misses:          142,022  (     29,316 rd   +     112,706 wr)
+==53== D1  miss rate:           0.5% (        0.7%     +         0.2%  )
+==53== LLd miss rate:           0.0% (        0.0%     +         0.0%  )
+==53== 
+==53== LL refs:           5,886,023  (  5,332,393 rd   +     553,630 wr)
+==53== LL misses:           155,165  (     42,459 rd   +     112,706 wr)
+==53== LL miss rate:            0.0% (        0.0%     +         0.0%  )
+==58== Cachegrind, a cache and branch-prediction profiler
+==58== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
+==58== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==58== Command: python3.7 CacheTest.py Blist 4 Select
+==58== 
+--58-- warning: L3 cache found, using its data for the LL simulation.
+--58-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
+--58-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
 Testing Blist
 10000
 Succeeded on Select
-==12989== 
-==12989== I   refs:      1,135,163,774
-==12989== I1  misses:        1,531,869
-==12989== LLi misses:           13,137
-==12989== I1  miss rate:          0.13%
-==12989== LLi miss rate:          0.00%
-==12989== 
-==12989== D   refs:        453,970,780  (315,457,576 rd   + 138,513,204 wr)
-==12989== D1  misses:        3,161,921  (  2,756,068 rd   +     405,853 wr)
-==12989== LLd misses:          136,013  (     29,317 rd   +     106,696 wr)
-==12989== D1  miss rate:           0.7% (        0.9%     +         0.3%  )
-==12989== LLd miss rate:           0.0% (        0.0%     +         0.1%  )
-==12989== 
-==12989== LL refs:           4,693,790  (  4,287,937 rd   +     405,853 wr)
-==12989== LL misses:           149,150  (     42,454 rd   +     106,696 wr)
-==12989== LL miss rate:            0.0% (        0.0%     +         0.1%  )
-==13024== Cachegrind, a cache and branch-prediction profiler
-==13024== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
-==13024== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==13024== Command: python3.7 CacheTest.py Blist 4 Delete
-==13024== 
---13024-- warning: L3 cache found, using its data for the LL simulation.
---13024-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
---13024-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
+==58== 
+==58== I   refs:      1,081,732,466
+==58== I1  misses:        1,602,794
+==58== LLi misses:           13,142
+==58== I1  miss rate:          0.15%
+==58== LLi miss rate:          0.00%
+==58== 
+==58== D   refs:        444,156,247  (305,639,304 rd   + 138,516,943 wr)
+==58== D1  misses:        3,483,018  (  3,072,641 rd   +     410,377 wr)
+==58== LLd misses:          136,013  (     29,318 rd   +     106,695 wr)
+==58== D1  miss rate:           0.8% (        1.0%     +         0.3%  )
+==58== LLd miss rate:           0.0% (        0.0%     +         0.1%  )
+==58== 
+==58== LL refs:           5,085,812  (  4,675,435 rd   +     410,377 wr)
+==58== LL misses:           149,155  (     42,460 rd   +     106,695 wr)
+==58== LL miss rate:            0.0% (        0.0%     +         0.1%  )
+==63== Cachegrind, a cache and branch-prediction profiler
+==63== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
+==63== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==63== Command: python3.7 CacheTest.py Blist 4 Delete
+==63== 
+--63-- warning: L3 cache found, using its data for the LL simulation.
+--63-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
+--63-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
 Testing Blist
 10000
 Succeeded on Delete
-==13024== 
-==13024== I   refs:      1,022,073,740
-==13024== I1  misses:        1,453,612
-==13024== LLi misses:           13,176
-==13024== I1  miss rate:          0.14%
-==13024== LLi miss rate:          0.00%
-==13024== 
-==13024== D   refs:        424,622,369  (291,005,440 rd   + 133,616,929 wr)
-==13024== D1  misses:        2,827,188  (  2,428,999 rd   +     398,189 wr)
-==13024== LLd misses:          136,010  (     29,318 rd   +     106,692 wr)
-==13024== D1  miss rate:           0.7% (        0.8%     +         0.3%  )
-==13024== LLd miss rate:           0.0% (        0.0%     +         0.1%  )
-==13024== 
-==13024== LL refs:           4,280,800  (  3,882,611 rd   +     398,189 wr)
-==13024== LL misses:           149,186  (     42,494 rd   +     106,692 wr)
-==13024== LL miss rate:            0.0% (        0.0%     +         0.1%  )
-==13047== Cachegrind, a cache and branch-prediction profiler
-==13047== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
-==13047== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==13047== Command: python3.7 CacheTest.py Blist 5 Base
-==13047== 
---13047-- warning: L3 cache found, using its data for the LL simulation.
---13047-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
---13047-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
+==63== 
+==63== I   refs:      1,003,320,038
+==63== I1  misses:        1,457,082
+==63== LLi misses:           13,183
+==63== I1  miss rate:          0.15%
+==63== LLi miss rate:          0.00%
+==63== 
+==63== D   refs:        422,102,708  (288,476,694 rd   + 133,626,014 wr)
+==63== D1  misses:        3,328,558  (  2,926,430 rd   +     402,128 wr)
+==63== LLd misses:          136,011  (     29,319 rd   +     106,692 wr)
+==63== D1  miss rate:           0.8% (        1.0%     +         0.3%  )
+==63== LLd miss rate:           0.0% (        0.0%     +         0.1%  )
+==63== 
+==63== LL refs:           4,785,640  (  4,383,512 rd   +     402,128 wr)
+==63== LL misses:           149,194  (     42,502 rd   +     106,692 wr)
+==63== LL miss rate:            0.0% (        0.0%     +         0.1%  )
+==68== Cachegrind, a cache and branch-prediction profiler
+==68== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
+==68== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==68== Command: python3.7 CacheTest.py Blist 5 Base
+==68== 
+--68-- warning: L3 cache found, using its data for the LL simulation.
+--68-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
+--68-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
 Testing Blist
 100000
 Succeeded on Base
-==13047== 
-==13047== I   refs:      10,705,600,799
-==13047== I1  misses:         2,967,764
-==13047== LLi misses:            13,369
-==13047== I1  miss rate:           0.03%
-==13047== LLi miss rate:           0.00%
-==13047== 
-==13047== D   refs:       4,485,162,780  (3,069,135,474 rd   + 1,416,027,306 wr)
-==13047== D1  misses:        19,027,412  (   16,852,174 rd   +     2,175,238 wr)
-==13047== LLd misses:           243,859  (       59,432 rd   +       184,427 wr)
-==13047== D1  miss rate:            0.4% (          0.5%     +           0.2%  )
-==13047== LLd miss rate:            0.0% (          0.0%     +           0.0%  )
-==13047== 
-==13047== LL refs:           21,995,176  (   19,819,938 rd   +     2,175,238 wr)
-==13047== LL misses:            257,228  (       72,801 rd   +       184,427 wr)
-==13047== LL miss rate:             0.0% (          0.0%     +           0.0%  )
-==13073== Cachegrind, a cache and branch-prediction profiler
-==13073== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
-==13073== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==13073== Command: python3.7 CacheTest.py Blist 5 Add
-==13073== 
---13073-- warning: L3 cache found, using its data for the LL simulation.
---13073-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
---13073-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
+==68== 
+==68== I   refs:      10,375,619,488
+==68== I1  misses:         2,973,319
+==68== LLi misses:            13,373
+==68== I1  miss rate:           0.03%
+==68== LLi miss rate:           0.00%
+==68== 
+==68== D   refs:       4,428,262,598  (3,012,222,943 rd   + 1,416,039,655 wr)
+==68== D1  misses:        17,766,198  (   15,691,671 rd   +     2,074,527 wr)
+==68== LLd misses:           243,835  (       59,404 rd   +       184,431 wr)
+==68== D1  miss rate:            0.4% (          0.5%     +           0.1%  )
+==68== LLd miss rate:            0.0% (          0.0%     +           0.0%  )
+==68== 
+==68== LL refs:           20,739,517  (   18,664,990 rd   +     2,074,527 wr)
+==68== LL misses:            257,208  (       72,777 rd   +       184,431 wr)
+==68== LL miss rate:             0.0% (          0.0%     +           0.0%  )
+==70== Cachegrind, a cache and branch-prediction profiler
+==70== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
+==70== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==70== Command: python3.7 CacheTest.py Blist 5 Add
+==70== 
+--70-- warning: L3 cache found, using its data for the LL simulation.
+--70-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
+--70-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
 Testing Blist
 100000
 Succeeded on Add
-==13073== 
-==13073== I   refs:      23,772,575,131
-==13073== I1  misses:         5,256,680
-==13073== LLi misses:            13,994
-==13073== I1  miss rate:           0.02%
-==13073== LLi miss rate:           0.00%
-==13073== 
-==13073== D   refs:       9,821,372,762  (6,729,742,519 rd   + 3,091,630,243 wr)
-==13073== D1  misses:        51,596,294  (   46,237,826 rd   +     5,358,468 wr)
-==13073== LLd misses:           356,763  (      119,319 rd   +       237,444 wr)
-==13073== D1  miss rate:            0.5% (          0.7%     +           0.2%  )
-==13073== LLd miss rate:            0.0% (          0.0%     +           0.0%  )
-==13073== 
-==13073== LL refs:           56,852,974  (   51,494,506 rd   +     5,358,468 wr)
-==13073== LL misses:            370,757  (      133,313 rd   +       237,444 wr)
-==13073== LL miss rate:             0.0% (          0.0%     +           0.0%  )
-==13108== Cachegrind, a cache and branch-prediction profiler
-==13108== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
-==13108== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==13108== Command: python3.7 CacheTest.py Blist 5 Select
-==13108== 
---13108-- warning: L3 cache found, using its data for the LL simulation.
---13108-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
---13108-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
+==70== 
+==70== I   refs:      22,271,539,515
+==70== I1  misses:         5,253,994
+==70== LLi misses:            13,995
+==70== I1  miss rate:           0.02%
+==70== LLi miss rate:           0.00%
+==70== 
+==70== D   refs:       9,578,525,536  (6,486,905,744 rd   + 3,091,619,792 wr)
+==70== D1  misses:        49,157,587  (   44,114,270 rd   +     5,043,317 wr)
+==70== LLd misses:           357,234  (      119,790 rd   +       237,444 wr)
+==70== D1  miss rate:            0.5% (          0.7%     +           0.2%  )
+==70== LLd miss rate:            0.0% (          0.0%     +           0.0%  )
+==70== 
+==70== LL refs:           54,411,581  (   49,368,264 rd   +     5,043,317 wr)
+==70== LL misses:            371,229  (      133,785 rd   +       237,444 wr)
+==70== LL miss rate:             0.0% (          0.0%     +           0.0%  )
+==75== Cachegrind, a cache and branch-prediction profiler
+==75== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
+==75== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==75== Command: python3.7 CacheTest.py Blist 5 Select
+==75== 
+--75-- warning: L3 cache found, using its data for the LL simulation.
+--75-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
+--75-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
 Testing Blist
 100000
 Succeeded on Select
-==13108== 
-==13108== I   refs:      11,191,164,276
-==13108== I1  misses:         3,797,432
-==13108== LLi misses:            13,369
-==13108== I1  miss rate:           0.03%
-==13108== LLi miss rate:           0.00%
-==13108== 
-==13108== D   refs:       4,747,461,853  (3,240,023,642 rd   + 1,507,438,211 wr)
-==13108== D1  misses:        19,462,249  (   17,289,042 rd   +     2,173,207 wr)
-==13108== LLd misses:           243,860  (       59,396 rd   +       184,464 wr)
-==13108== D1  miss rate:            0.4% (          0.5%     +           0.1%  )
-==13108== LLd miss rate:            0.0% (          0.0%     +           0.0%  )
-==13108== 
-==13108== LL refs:           23,259,681  (   21,086,474 rd   +     2,173,207 wr)
-==13108== LL misses:            257,229  (       72,765 rd   +       184,464 wr)
-==13108== LL miss rate:             0.0% (          0.0%     +           0.0%  )
-==13143== Cachegrind, a cache and branch-prediction profiler
-==13143== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
-==13143== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==13143== Command: python3.7 CacheTest.py Blist 5 Delete
-==13143== 
---13143-- warning: L3 cache found, using its data for the LL simulation.
---13143-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
---13143-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
+==75== 
+==75== I   refs:      10,753,861,010
+==75== I1  misses:         3,798,701
+==75== LLi misses:            13,379
+==75== I1  miss rate:           0.04%
+==75== LLi miss rate:           0.00%
+==75== 
+==75== D   refs:       4,675,795,605  (3,168,339,112 rd   + 1,507,456,493 wr)
+==75== D1  misses:        17,915,874  (   15,938,844 rd   +     1,977,030 wr)
+==75== LLd misses:           243,850  (       59,374 rd   +       184,476 wr)
+==75== D1  miss rate:            0.4% (          0.5%     +           0.1%  )
+==75== LLd miss rate:            0.0% (          0.0%     +           0.0%  )
+==75== 
+==75== LL refs:           21,714,575  (   19,737,545 rd   +     1,977,030 wr)
+==75== LL misses:            257,229  (       72,753 rd   +       184,476 wr)
+==75== LL miss rate:             0.0% (          0.0%     +           0.0%  )
+==80== Cachegrind, a cache and branch-prediction profiler
+==80== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
+==80== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==80== Command: python3.7 CacheTest.py Blist 5 Delete
+==80== 
+--80-- warning: L3 cache found, using its data for the LL simulation.
+--80-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
+--80-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
 Testing Blist
 100000
 Succeeded on Delete
-==13143== 
-==13143== I   refs:      10,513,520,326
-==13143== I1  misses:         2,979,290
-==13143== LLi misses:            13,407
-==13143== I1  miss rate:           0.03%
-==13143== LLi miss rate:           0.00%
-==13143== 
-==13143== D   refs:       4,535,701,529  (3,077,910,820 rd   + 1,457,790,709 wr)
-==13143== D1  misses:        17,911,842  (   15,926,895 rd   +     1,984,947 wr)
-==13143== LLd misses:           243,825  (       59,380 rd   +       184,445 wr)
-==13143== D1  miss rate:            0.4% (          0.5%     +           0.1%  )
-==13143== LLd miss rate:            0.0% (          0.0%     +           0.0%  )
-==13143== 
-==13143== LL refs:           20,891,132  (   18,906,185 rd   +     1,984,947 wr)
-==13143== LL misses:            257,232  (       72,787 rd   +       184,445 wr)
-==13143== LL miss rate:             0.0% (          0.0%     +           0.0%  )
-==13166== Cachegrind, a cache and branch-prediction profiler
-==13166== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
-==13166== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==13166== Command: python3.7 CacheTest.py Blist 6 Base
-==13166== 
---13166-- warning: L3 cache found, using its data for the LL simulation.
---13166-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
---13166-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
-==13166== brk segment overflow in thread #1: can't grow to 0x4a45000
-==13166== (see section Limitations in user manual)
-==13166== NOTE: further instances of this message will not be shown
+==80== 
+==80== I   refs:      10,704,558,871
+==80== I1  misses:         2,983,982
+==80== LLi misses:            13,413
+==80== I1  miss rate:           0.03%
+==80== LLi miss rate:           0.00%
+==80== 
+==80== D   refs:       4,567,578,936  (3,109,787,203 rd   + 1,457,791,733 wr)
+==80== D1  misses:        18,920,803  (   16,746,218 rd   +     2,174,585 wr)
+==80== LLd misses:           243,832  (       59,373 rd   +       184,459 wr)
+==80== D1  miss rate:            0.4% (          0.5%     +           0.1%  )
+==80== LLd miss rate:            0.0% (          0.0%     +           0.0%  )
+==80== 
+==80== LL refs:           21,904,785  (   19,730,200 rd   +     2,174,585 wr)
+==80== LL misses:            257,245  (       72,786 rd   +       184,459 wr)
+==80== LL miss rate:             0.0% (          0.0%     +           0.0%  )
+==85== Cachegrind, a cache and branch-prediction profiler
+==85== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
+==85== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==85== Command: python3.7 CacheTest.py Blist 6 Base
+==85== 
+--85-- warning: L3 cache found, using its data for the LL simulation.
+--85-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
+--85-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
+==85== brk segment overflow in thread #1: can't grow to 0x4a45000
+==85== (see section Limitations in user manual)
+==85== NOTE: further instances of this message will not be shown
 Testing Blist
 1000000
 Succeeded on Base
-==13166== 
-==13166== I   refs:      130,482,079,922
-==13166== I1  misses:         18,139,860
-==13166== LLi misses:             16,926
-==13166== I1  miss rate:            0.01%
-==13166== LLi miss rate:            0.00%
-==13166== 
-==13166== D   refs:       54,925,135,840  (37,368,669,685 rd   + 17,556,466,155 wr)
-==13166== D1  misses:        396,057,874  (   364,089,877 rd   +     31,967,997 wr)
-==13166== LLd misses:          7,816,004  (     6,823,383 rd   +        992,621 wr)
-==13166== D1  miss rate:             0.7% (           1.0%     +            0.2%  )
-==13166== LLd miss rate:             0.0% (           0.0%     +            0.0%  )
-==13166== 
-==13166== LL refs:           414,197,734  (   382,229,737 rd   +     31,967,997 wr)
-==13166== LL misses:           7,832,930  (     6,840,309 rd   +        992,621 wr)
-==13166== LL miss rate:              0.0% (           0.0%     +            0.0%  )
-==13193== Cachegrind, a cache and branch-prediction profiler
-==13193== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
-==13193== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==13193== Command: python3.7 CacheTest.py Blist 6 Add
-==13193== 
---13193-- warning: L3 cache found, using its data for the LL simulation.
---13193-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
---13193-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
-==13193== brk segment overflow in thread #1: can't grow to 0x4a45000
-==13193== (see section Limitations in user manual)
-==13193== NOTE: further instances of this message will not be shown
+==85== 
+==85== I   refs:      139,157,941,723
+==85== I1  misses:         18,138,713
+==85== LLi misses:             16,928
+==85== I1  miss rate:            0.01%
+==85== LLi miss rate:            0.00%
+==85== 
+==85== D   refs:       56,370,787,195  (38,814,318,012 rd   + 17,556,469,183 wr)
+==85== D1  misses:        417,479,942  (   381,791,720 rd   +     35,688,222 wr)
+==85== LLd misses:          7,815,997  (     6,823,395 rd   +        992,602 wr)
+==85== D1  miss rate:             0.7% (           1.0%     +            0.2%  )
+==85== LLd miss rate:             0.0% (           0.0%     +            0.0%  )
+==85== 
+==85== LL refs:           435,618,655  (   399,930,433 rd   +     35,688,222 wr)
+==85== LL misses:           7,832,925  (     6,840,323 rd   +        992,602 wr)
+==85== LL miss rate:              0.0% (           0.0%     +            0.0%  )
+==87== Cachegrind, a cache and branch-prediction profiler
+==87== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
+==87== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==87== Command: python3.7 CacheTest.py Blist 6 Add
+==87== 
+--87-- warning: L3 cache found, using its data for the LL simulation.
+--87-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
+--87-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
+==87== brk segment overflow in thread #1: can't grow to 0x4a45000
+==87== (see section Limitations in user manual)
+==87== NOTE: further instances of this message will not be shown
 Testing Blist
 1000000
 Succeeded on Add
-==13193== 
-==13193== I   refs:      281,653,408,433
-==13193== I1  misses:         40,977,461
-==13193== LLi misses:             18,321
-==13193== I1  miss rate:            0.01%
-==13193== LLi miss rate:            0.00%
-==13193== 
-==13193== D   refs:      118,483,583,285  (80,337,218,220 rd   + 38,146,365,065 wr)
-==13193== D1  misses:        994,376,191  (   912,108,745 rd   +     82,267,446 wr)
-==13193== LLd misses:         13,343,608  (    11,650,124 rd   +      1,693,484 wr)
-==13193== D1  miss rate:             0.8% (           1.1%     +            0.2%  )
-==13193== LLd miss rate:             0.0% (           0.0%     +            0.0%  )
-==13193== 
-==13193== LL refs:         1,035,353,652  (   953,086,206 rd   +     82,267,446 wr)
-==13193== LL misses:          13,361,929  (    11,668,445 rd   +      1,693,484 wr)
-==13193== LL miss rate:              0.0% (           0.0%     +            0.0%  )
-==13228== Cachegrind, a cache and branch-prediction profiler
-==13228== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
-==13228== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==13228== Command: python3.7 CacheTest.py Blist 6 Select
-==13228== 
---13228-- warning: L3 cache found, using its data for the LL simulation.
---13228-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
---13228-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
-==13228== brk segment overflow in thread #1: can't grow to 0x4a45000
-==13228== (see section Limitations in user manual)
-==13228== NOTE: further instances of this message will not be shown
+==87== 
+==87== I   refs:      276,702,785,238
+==87== I1  misses:         40,978,342
+==87== LLi misses:             18,306
+==87== I1  miss rate:            0.01%
+==87== LLi miss rate:            0.00%
+==87== 
+==87== D   refs:      117,819,763,454  (79,673,414,188 rd   + 38,146,349,266 wr)
+==87== D1  misses:        980,181,760  (   902,633,736 rd   +     77,548,024 wr)
+==87== LLd misses:         13,343,370  (    11,649,950 rd   +      1,693,420 wr)
+==87== D1  miss rate:             0.8% (           1.1%     +            0.2%  )
+==87== LLd miss rate:             0.0% (           0.0%     +            0.0%  )
+==87== 
+==87== LL refs:         1,021,160,102  (   943,612,078 rd   +     77,548,024 wr)
+==87== LL misses:          13,361,676  (    11,668,256 rd   +      1,693,420 wr)
+==87== LL miss rate:              0.0% (           0.0%     +            0.0%  )
+==92== Cachegrind, a cache and branch-prediction profiler
+==92== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
+==92== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==92== Command: python3.7 CacheTest.py Blist 6 Select
+==92== 
+--92-- warning: L3 cache found, using its data for the LL simulation.
+--92-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
+--92-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
+==92== brk segment overflow in thread #1: can't grow to 0x4a45000
+==92== (see section Limitations in user manual)
+==92== NOTE: further instances of this message will not be shown
 Testing Blist
 1000000
 Succeeded on Select
-==13228== 
-==13228== I   refs:      137,079,309,787
-==13228== I1  misses:         26,403,141
-==13228== LLi misses:             17,376
-==13228== I1  miss rate:            0.02%
-==13228== LLi miss rate:            0.00%
-==13228== 
-==13228== D   refs:       57,868,902,909  (39,392,741,326 rd   + 18,476,161,583 wr)
-==13228== D1  misses:        397,597,979  (   364,575,090 rd   +     33,022,889 wr)
-==13228== LLd misses:          8,494,869  (     7,498,307 rd   +        996,562 wr)
-==13228== D1  miss rate:             0.7% (           0.9%     +            0.2%  )
-==13228== LLd miss rate:             0.0% (           0.0%     +            0.0%  )
-==13228== 
-==13228== LL refs:           424,001,120  (   390,978,231 rd   +     33,022,889 wr)
-==13228== LL misses:           8,512,245  (     7,515,683 rd   +        996,562 wr)
-==13228== LL miss rate:              0.0% (           0.0%     +            0.0%  )
-==13263== Cachegrind, a cache and branch-prediction profiler
-==13263== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
-==13263== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==13263== Command: python3.7 CacheTest.py Blist 6 Delete
-==13263== 
---13263-- warning: L3 cache found, using its data for the LL simulation.
---13263-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
---13263-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
-==13263== brk segment overflow in thread #1: can't grow to 0x4a45000
-==13263== (see section Limitations in user manual)
-==13263== NOTE: further instances of this message will not be shown
+==92== 
+==92== I   refs:      130,656,649,924
+==92== I1  misses:         26,401,428
+==92== LLi misses:             17,386
+==92== I1  miss rate:            0.02%
+==92== LLi miss rate:            0.00%
+==92== 
+==92== D   refs:       56,803,440,712  (38,327,280,880 rd   + 18,476,159,832 wr)
+==92== D1  misses:        385,011,410  (   353,918,310 rd   +     31,093,100 wr)
+==92== LLd misses:          8,494,920  (     7,498,354 rd   +        996,566 wr)
+==92== D1  miss rate:             0.7% (           0.9%     +            0.2%  )
+==92== LLd miss rate:             0.0% (           0.0%     +            0.0%  )
+==92== 
+==92== LL refs:           411,412,838  (   380,319,738 rd   +     31,093,100 wr)
+==92== LL misses:           8,512,306  (     7,515,740 rd   +        996,566 wr)
+==92== LL miss rate:              0.0% (           0.0%     +            0.0%  )
+==97== Cachegrind, a cache and branch-prediction profiler
+==97== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
+==97== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==97== Command: python3.7 CacheTest.py Blist 6 Delete
+==97== 
+--97-- warning: L3 cache found, using its data for the LL simulation.
+--97-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
+--97-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
+==97== brk segment overflow in thread #1: can't grow to 0x4a45000
+==97== (see section Limitations in user manual)
+==97== NOTE: further instances of this message will not be shown
 Testing Blist
 1000000
 Succeeded on Delete
-==13263== 
-==13263== I   refs:      144,846,798,904
-==13263== I1  misses:         18,250,750
-==13263== LLi misses:             16,817
-==13263== I1  miss rate:            0.01%
-==13263== LLi miss rate:            0.00%
-==13263== 
-==13263== D   refs:       58,124,213,002  (40,149,756,264 rd   + 17,974,456,738 wr)
-==13263== D1  misses:        424,820,989  (   388,199,213 rd   +     36,621,776 wr)
-==13263== LLd misses:          6,431,293  (     5,460,486 rd   +        970,807 wr)
-==13263== D1  miss rate:             0.7% (           1.0%     +            0.2%  )
-==13263== LLd miss rate:             0.0% (           0.0%     +            0.0%  )
-==13263== 
-==13263== LL refs:           443,071,739  (   406,449,963 rd   +     36,621,776 wr)
-==13263== LL misses:           6,448,110  (     5,477,303 rd   +        970,807 wr)
-==13263== LL miss rate:              0.0% (           0.0%     +            0.0%  )
-==13286== Cachegrind, a cache and branch-prediction profiler
-==13286== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
-==13286== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==13286== Command: python3.7 CacheTest.py Blist 7 Base
-==13286== 
---13286-- warning: L3 cache found, using its data for the LL simulation.
---13286-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
---13286-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
-==13286== brk segment overflow in thread #1: can't grow to 0x4a39000
-==13286== (see section Limitations in user manual)
-==13286== NOTE: further instances of this message will not be shown
+==97== 
+==97== I   refs:      129,489,001,018
+==97== I1  misses:         18,249,140
+==97== LLi misses:             16,823
+==97== I1  miss rate:            0.01%
+==97== LLi miss rate:            0.00%
+==97== 
+==97== D   refs:       55,607,154,544  (37,632,693,985 rd   + 17,974,460,559 wr)
+==97== D1  misses:        389,538,291  (   358,028,129 rd   +     31,510,162 wr)
+==97== LLd misses:          6,431,253  (     5,460,458 rd   +        970,795 wr)
+==97== D1  miss rate:             0.7% (           1.0%     +            0.2%  )
+==97== LLd miss rate:             0.0% (           0.0%     +            0.0%  )
+==97== 
+==97== LL refs:           407,787,431  (   376,277,269 rd   +     31,510,162 wr)
+==97== LL misses:           6,448,076  (     5,477,281 rd   +        970,795 wr)
+==97== LL miss rate:              0.0% (           0.0%     +            0.0%  )
+==102== Cachegrind, a cache and branch-prediction profiler
+==102== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
+==102== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==102== Command: python3.7 CacheTest.py Blist 7 Base
+==102== 
+--102-- warning: L3 cache found, using its data for the LL simulation.
+--102-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
+--102-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
+==102== brk segment overflow in thread #1: can't grow to 0x4a39000
+==102== (see section Limitations in user manual)
+==102== NOTE: further instances of this message will not be shown
 Testing Blist
 10000000
 Succeeded on Base
-==13286== 
-==13286== I   refs:      1,535,966,606,615
-==13286== I1  misses:          169,780,200
-==13286== LLi misses:               25,116
-==13286== I1  miss rate:              0.01%
-==13286== LLi miss rate:              0.00%
-==13286== 
-==13286== D   refs:        663,868,374,721  (446,106,972,565 rd   + 217,761,402,156 wr)
-==13286== D1  misses:        6,415,509,358  (  5,931,960,748 rd   +     483,548,610 wr)
-==13286== LLd misses:          125,636,618  (    115,830,624 rd   +       9,805,994 wr)
-==13286== D1  miss rate:               1.0% (            1.3%     +             0.2%  )
-==13286== LLd miss rate:               0.0% (            0.0%     +             0.0%  )
-==13286== 
-==13286== LL refs:           6,585,289,558  (  6,101,740,948 rd   +     483,548,610 wr)
-==13286== LL misses:           125,661,734  (    115,855,740 rd   +       9,805,994 wr)
-==13286== LL miss rate:                0.0% (            0.0%     +             0.0%  )
+==102== 
+==102== I   refs:      1,541,510,536,408
+==102== I1  misses:          169,620,146
+==102== LLi misses:               25,191
+==102== I1  miss rate:              0.01%
+==102== LLi miss rate:              0.00%
+==102== 
+==102== D   refs:        664,478,030,693  (446,716,647,619 rd   + 217,761,383,074 wr)
+==102== D1  misses:        6,339,841,225  (  5,866,460,547 rd   +     473,380,678 wr)
+==102== LLd misses:          125,636,418  (    115,830,392 rd   +       9,806,026 wr)
+==102== D1  miss rate:               1.0% (            1.3%     +             0.2%  )
+==102== LLd miss rate:               0.0% (            0.0%     +             0.0%  )
+==102== 
+==102== LL refs:           6,509,461,371  (  6,036,080,693 rd   +     473,380,678 wr)
+==102== LL misses:           125,661,609  (    115,855,583 rd   +       9,806,026 wr)
+==102== LL miss rate:                0.0% (            0.0%     +             0.0%  )
+==124== Cachegrind, a cache and branch-prediction profiler
+==124== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
+==124== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==124== Command: python3.7 CacheTest.py Blist 7 Add
+==124== 
+--124-- warning: L3 cache found, using its data for the LL simulation.
+--124-- warning: specified LL cache: line_size 64  assoc 16  total_size 12,582,912
+--124-- warning: simulated LL cache: line_size 64  assoc 24  total_size 12,582,912
+==124== brk segment overflow in thread #1: can't grow to 0x4a39000
+==124== (see section Limitations in user manual)
+==124== NOTE: further instances of this message will not be shown
+Testing Blist
+10000000
+Succeeded on Add
+==124== 
+==124== I   refs:      3,313,842,713,583
+==124== I1  misses:          398,160,814
+==124== LLi misses:               42,894
+==124== I1  miss rate:              0.01%
+==124== LLi miss rate:              0.00%
+==124== 
+==124== D   refs:      1,418,780,701,421  (953,685,175,461 rd   + 465,095,525,960 wr)
+==124== D1  misses:       15,736,277,589  ( 14,621,756,775 rd   +   1,114,520,814 wr)
+==124== LLd misses:          244,941,093  (    227,728,293 rd   +      17,212,800 wr)
+==124== D1  miss rate:               1.1% (            1.5%     +             0.2%  )
+==124== LLd miss rate:               0.0% (            0.0%     +             0.0%  )
+==124== 
+==124== LL refs:          16,134,438,403  ( 15,019,917,589 rd   +   1,114,520,814 wr)
+==124== LL misses:           244,983,987  (    227,771,187 rd   +      17,212,800 wr)
+==124== LL miss rate:                0.0% (            0.0%     +             0.0%  )
