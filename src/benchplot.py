@@ -60,8 +60,8 @@ def createplotforoperation(op, data, inter):
     plt.savefig(f'../results/graphs_{inter}/{op}.png')
 
 if __name__ == '__main__':
-    for l in ['pypy', 'cpython']:
-        data = pd.read_csv(f"../results/timings/{l}_res.csv")
+    for l in ['PyPy', 'CPython']:
+        data = pd.read_csv(f"../results/timings/{l.lower()}_res.csv")
         ops = list(pd.unique(data["Op"]))
         for op in ops:
             createplotforoperation(op, data, l)
