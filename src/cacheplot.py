@@ -7,6 +7,8 @@ markers=['o', '^', 's', 'D', 'x', '1', '|']
 def createplotforoperation(op, data, cac):
     plt.cla()
     plt.clf()
+    plt.rcParams.update({'font.size': 12})
+    plt.figure(figsize=(7.5,5)) 
     df = pd.DataFrame(data[data["Op"] == op])
     df = df.astype({'OpCount': 'int64'})
     texts = []
@@ -22,8 +24,8 @@ def createplotforoperation(op, data, cac):
         
     plt.yscale('log')
     plt.xscale('log')
-    plt.xlabel('Initial elements')
-    plt.ylabel('Cache Misses')
+    plt.xlabel('Initial elements and operation count')
+    plt.ylabel('Amount')
     plt.grid(True, which="both", linestyle='--')
     #adjust_text(texts, only_move={'points':'y', 'texts':'y'}, arrowprops=dict(arrowstyle="->", color='r', lw=0.5))
     #adjust_text(texts, autoalign=y, avoid_points=False,  only_move={'points':'y', 'texts':'y'})
@@ -47,7 +49,7 @@ def createplotforoperation(op, data, cac):
         mi.xy = (mi._x, mi._y)
         ma.xy = (ma._x, ma._y)
     #texts[0].set_y(texts[0].xy[1] + texts[0].xy[1] / 5)
-    plt.title(f'Cache misses for operation "{op}" over N in cache {cac}')
+    plt.title(f'Cache misses for operation "{op}" N times, statistics {cac}')
     plt.legend(loc="upper left")
     plt.margins(x=0)
     plt.tight_layout()
