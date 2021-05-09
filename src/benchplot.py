@@ -22,7 +22,7 @@ def createplotforoperation(op, data, inter):
     print(df)
     texts = []
     i = 0
-    for name in pd.unique(df['DS']):
+    for name in sorted(list(pd.unique(df['DS']))):
         dfn = df[df['DS'] == name]
         x = list(dfn['Size'])
         y = list(dfn['Avg(micros)'])

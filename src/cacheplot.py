@@ -13,7 +13,7 @@ def createplotforoperation(op, data, cac):
     df = df.astype({'OpCount': 'int64'})
     texts = []
     i = 0
-    for name in pd.unique(df['DS']):
+    for name in sorted(list(pd.unique(df['DS']))):
         dfn = df[(df['DS'] == name) & (df['Cache'] == cac)]
         print(dfn)
         x = list(dfn['Size'])
