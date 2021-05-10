@@ -74,7 +74,7 @@ def createplotforoperation(op, data, cac):
 
     
     pathlib.Path(f'../results/graphs_cache').mkdir(parents=True, exist_ok=True) 
-    plt.savefig(f'../results/graphs_cache/{op}_{cac}.png')
+    plt.savefig(f'../results/graphs_cache/{op}_{cac}.pdf', bbox_inches='tight')
 
     #plt.show()
 

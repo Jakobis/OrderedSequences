@@ -57,7 +57,7 @@ def createplotforoperation(op, data, inter):
     plt.tight_layout()
 
     pathlib.Path(f'../results/graphs_{inter}').mkdir(parents=True, exist_ok=True) 
-    plt.savefig(f'../results/graphs_{inter}/{op}.png')
+    plt.savefig(f'../results/graphs_{inter}/{op}.pdf', bbox_inches='tight')
 
 if __name__ == '__main__':
     for l in ['PyPy', 'CPython']:
