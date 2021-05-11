@@ -2,6 +2,7 @@ from datastructures import structures
 import random, time, gc, threading
 import traceback
 import pathlib, sys
+import platform   
 import numpy as np
 MININT = -2147483648
 MAXINT = 2147483647
@@ -126,7 +127,10 @@ def run_benchmark(filename):
         # and can therefore be called until they took at least 1 second to run.
         for n in range(4, N):
             preload_values = l_preload_values[:10**n]
-            select_values =  [np.random.randint(0, len(preload_values)) for i in range(4194304)]# 4 million should be enough
+            if "PyPy" in platform.python_implementation(): #4 million is not enough for pypy
+                select_values =  [np.random.randint(0, len(preload_values)) for i in range(4194304 * 6)]
+            else:
+                select_values =  [np.random.randint(0, len(preload_values)) for i in range(4194304)]# 4 million should be enough
             for ds in structures:
                 selects = 64
                 instance = init_structure(ds, preload_values)
