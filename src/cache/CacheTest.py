@@ -3,7 +3,7 @@ import sortedcontainers
 import sys
 from pyskiplist import SkipList
 sys.path.append('..')
-from datastructures import SortedArray, AutoLoad, SortedBadBisect
+from datastructures import SCArray, SCAutoBalance, SCPyBisect
 from itu.algs4.searching.red_black_bst import RedBlackBST
 
 N = int(sys.argv[2])
@@ -11,13 +11,13 @@ N = int(sys.argv[2])
 if sys.argv[1] == 'Blist':
     l = blist.sortedlist([i for i in range(10**N)])
 elif sys.argv[1] == 'SortedArray':
-    l = SortedArray._SortedArray('q', [i for i in range(10**N)])
+    l = SCArray._SortedArray('q', [i for i in range(10**N)])
 elif sys.argv[1] == 'SortedList':
     l = sortedcontainers.SortedList([i for i in range(10**N)])
 elif sys.argv[1] == 'AutoLoad':
-    l = AutoLoad.SortedList([i for i in range(10**N)])
+    l = SCAutoBalance.SortedList([i for i in range(10**N)])
 elif sys.argv[1] == 'BadBisect':
-    l = SortedBadBisect.SortedList([i for i in range(10**N)])
+    l = SCPyBisect.SortedList([i for i in range(10**N)])
 elif sys.argv[1] == 'RBSTree':
     l = RedBlackBST()
     for i in range(10**N): 

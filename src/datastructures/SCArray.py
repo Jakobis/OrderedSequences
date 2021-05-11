@@ -1,7 +1,7 @@
 from datastructures.Template import Template
 # TODO: Look at making the Index an array as well.
-class SortedArray(Template):
-    def __init__(self, preload = [0, 0]):
+class SCArray(Template):
+    def __init__(self, preload = []):
         self.li = _SortedArray('q', preload)
     
     def add(self, element):

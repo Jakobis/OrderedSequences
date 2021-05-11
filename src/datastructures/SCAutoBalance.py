@@ -3,7 +3,7 @@ from __future__ import print_function
 from datastructures.Template import Template
 
 
-class AutoLoad(Template):
+class SCAutoBalance(Template):
     def __init__(self, preload = []):
         self.li = SortedList(preload)
 

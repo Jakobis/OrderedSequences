@@ -147,7 +147,7 @@ def run_benchmark(filename):
         for n in range(4, N):
             preload_values = l_preload_values[:10**n]
             
-            rank_values =  [random.choice(preload_values) for i in range(4194304)]
+            rank_values =  [preload_values[random.randint(0, len(preload_values) - 1)] for i in range(4194304)]
             for ds in structures:
                 ranks = 64
                 instance = init_structure(ds, preload_values)
@@ -168,7 +168,7 @@ def run_benchmark(filename):
         l_preload_values.sort() # Just makes it easier from after this
         for n in range(4, N):
             preload_values = l_preload_values[:10**n]
-            successor_values =  [random.choice(preload_values[1:-1]) for i in range(4194304)] # 4 million should be enough
+            successor_values =  [preload_values[random.randint(1, len(preload_values) - 2)] for i in range(4194304)] # 4 million should be enough
             for ds in structures:
                 successors = 64
                 instance = init_structure(ds, preload_values)
@@ -187,7 +187,7 @@ def run_benchmark(filename):
         # We can just reuse the choices from before
         for n in range(4, N):
             preload_values = l_preload_values[:10**n]
-            predecessor_values =  [random.choice(preload_values[1:-1]) for i in range(4194304)] # 4 million should be enough
+            predecessor_values =  [preload_values[random.randint(1, len(preload_values) - 2)] for i in range(4194304)] # 4 million should be enough
             for ds in structures:
                 predessors = 64
                 instance = init_structure(ds, preload_values)

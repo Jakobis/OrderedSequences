@@ -1,6 +1,6 @@
 from datastructures.Template import Template
 
-class SortedBadBisect(Template):
+class SCPyBisect(Template):
     def __init__(self, preload = []):
         self.li = SortedList(preload)
 
@@ -44,7 +44,7 @@ class SortedBadBisect(Template):
         return len(self.li)
 
 
-def bisect_right_py(a, x, lo=0, hi=None):
+def bisect_right(a, x, lo=0, hi=None):
     # Python implementation of bisect, so it does not get accelerated in C
     if lo < 0:
         raise ValueError('lo must be non-negative')
@@ -56,22 +56,31 @@ def bisect_right_py(a, x, lo=0, hi=None):
         else: lo = mid+1
     return lo
 
+def bisect_left(a, x, lo=0, hi=None):
+    if lo < 0:
+        raise ValueError('lo must be non-negative')
+    if hi is None:
+        hi = len(a)
+    while lo < hi:
+        mid = (lo+hi)//2
+        # Use __lt__ to match the logic in list.sort() and in heapq
+        if a[mid] < x: lo = mid+1
+        else: hi = mid
+    return lo
+
 def insort_right(a, x, lo=0, hi=None, *, key=None):
-    """Insert item x in list a, and keep it sorted assuming a is sorted.
-    If x is already in a, insert it to the right of the rightmost x.
-    Optional args lo (default 0) and hi (default len(a)) bound the
-    slice of a to be searched.
-    """
     if key is None:
-        lo = bisect_right_py(a, x, lo, hi)
+        lo = bisect_right(a, x, lo, hi)
     else:
-        lo = bisect_right_py(a, key(x), lo, hi, key=key)
+        lo = bisect_right(a, key(x), lo, hi, key=key)
+    a.insert(lo, x)
+
+def insort_left(a, x, lo=0, hi=None):
+    lo = bisect_left(a, x, lo, hi)
     a.insert(lo, x)
 
 import sys
 import traceback
-
-from bisect import bisect_left
 from itertools import chain, repeat, starmap
 from math import log
 from operator import add, eq, ne, gt, ge, lt, le, iadd
@@ -307,7 +316,7 @@ class SortedList(MutableSequence):
         _maxes = self._maxes
 
         if _maxes:
-            pos = bisect_right_py(_maxes, value)
+            pos = bisect_right(_maxes, value)
 
             if pos == len(_maxes):
                 pos -= 1
@@ -1156,12 +1165,12 @@ class SortedList(MutableSequence):
 
                 min_idx = bisect_left(_lists[min_pos], minimum)
             else:
-                min_pos = bisect_right_py(_maxes, minimum)
+                min_pos = bisect_right(_maxes, minimum)
 
                 if min_pos == len(_maxes):
                     return iter(())
 
-                min_idx = bisect_right_py(_lists[min_pos], minimum)
+                min_idx = bisect_right(_lists[min_pos], minimum)
 
         # Calculate the maximum (pos, idx) pair. By default this location
         # will be exclusive in our calculation.
@@ -1171,13 +1180,13 @@ class SortedList(MutableSequence):
             max_idx = len(_lists[max_pos])
         else:
             if inclusive[1]:
-                max_pos = bisect_right_py(_maxes, maximum)
+                max_pos = bisect_right(_maxes, maximum)
 
                 if max_pos == len(_maxes):
                     max_pos -= 1
                     max_idx = len(_lists[max_pos])
                 else:
-                    max_idx = bisect_right_py(_lists[max_pos], maximum)
+                    max_idx = bisect_right(_lists[max_pos], maximum)
             else:
                 max_pos = bisect_left(_maxes, maximum)
 
@@ -1222,12 +1231,12 @@ class SortedList(MutableSequence):
         if not _maxes:
             return 0
 
-        pos = bisect_right_py(_maxes, value)
+        pos = bisect_right(_maxes, value)
 
         if pos == len(_maxes):
             return self._len
 
-        idx = bisect_right_py(self._lists[pos], value)
+        idx = bisect_right(self._lists[pos], value)
         return self._loc(pos, idx)
 
     bisect = bisect_right
@@ -1259,12 +1268,12 @@ class SortedList(MutableSequence):
 
         _lists = self._lists
         idx_left = bisect_left(_lists[pos_left], value)
-        pos_right = bisect_right_py(_maxes, value)
+        pos_right = bisect_right(_maxes, value)
 
         if pos_right == len(_maxes):
             return self._len - self._loc(pos_left, idx_left)
 
-        idx_right = bisect_right_py(_lists[pos_right], value)
+        idx_right = bisect_right(_lists[pos_right], value)
 
         if pos_left == pos_right:
             return idx_right - idx_left
