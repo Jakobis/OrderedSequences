@@ -53,7 +53,7 @@ def createplotforoperation(op, data, inter):
         ma.xy = (ma._x, ma._y)
     plt.legend(loc="upper left")
     plt.margins(x=0)
-    plt.title(f'Average runtimes for operation "{op}" over N in {l}')
+    plt.title(f'Average runtime for N "{op}" operations in {l}')
     plt.tight_layout()
 
     pathlib.Path(f'../results/graphs_{inter}').mkdir(parents=True, exist_ok=True) 

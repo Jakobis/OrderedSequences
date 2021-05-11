@@ -49,7 +49,7 @@ def createplotforoperation(op, data, cac):
         mi.xy = (mi._x, mi._y)
         ma.xy = (ma._x, ma._y)
     #texts[0].set_y(texts[0].xy[1] + texts[0].xy[1] / 5)
-    plt.title(f'Cache misses for operation "{op}" N times, statistics {cac}\n Ran using CPython')
+    plt.title(f'Count for statistics {cac} for N "{op}" operations\nRan using CPython')
     plt.legend(loc="upper left")
     plt.margins(x=0)
     plt.tight_layout()
