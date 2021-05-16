@@ -20,7 +20,7 @@ def createplotforoperation(op, data, cac):
         y = list(dfn['Misses'])
         p = plt.plot(x, y, label=name, marker=markers[i])
         i += 1
-        texts.append(plt.annotate(f'{name} DLmr', (x[-1], y[-1] ), color = p[0].get_color()))
+        texts.append(plt.annotate(f'{name}', (x[-1], y[-1] ), color = p[0].get_color()))
         
     plt.yscale('log')
     plt.xscale('log')
