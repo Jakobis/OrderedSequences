@@ -49,7 +49,7 @@ def createplotforoperation(op, data, cac):
         mi.xy = (mi._x, mi._y)
         ma.xy = (ma._x, ma._y)
     #texts[0].set_y(texts[0].xy[1] + texts[0].xy[1] / 5)
-    plt.title(f'Count for statistics {cac} for N "{op}" operations\nRan using CPython')
+    plt.title(f'Count for statistics {cac} for N "{op}" operations\nRan using Pypy')
     plt.legend(loc="upper left")
     plt.margins(x=0)
     plt.tight_layout()
@@ -74,12 +74,12 @@ def createplotforoperation(op, data, cac):
 
     
     pathlib.Path(f'../results/graphs_cache').mkdir(parents=True, exist_ok=True) 
-    plt.savefig(f'../results/graphs_cache/{op}_{cac}.png')
+    plt.savefig(f'../results/graphs_cache/{op}_{cac}_pypy.png')
 
     #plt.show()
 
 if __name__ == '__main__':
-    data = pd.read_csv(f"../results/cache/cache.csv")
+    data = pd.read_csv(f"../results/cache/cache.pypy.csv")
     ops = list(pd.unique(data["Op"]))
     for op in ops:
         for cac in list(pd.unique(data["Cache"])):

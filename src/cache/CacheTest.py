@@ -1,4 +1,6 @@
-import blist
+import platform
+if "PyPy" not in platform.python_implementation():
+    import blist
 import sortedcontainers
 import sys
 from pyskiplist import SkipList
