@@ -2,6 +2,7 @@ import pathlib
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import statistics
 markers=['o', '^', 's', 'D', 'x', '1', '|']
 
 def createplotforoperation(op, data, cac):
@@ -16,12 +17,18 @@ def createplotforoperation(op, data, cac):
     for name in sorted(list(pd.unique(df['DS']))):
         dfn = df[(df['DS'] == name) & (df['Cache'] == cac)]
         print(dfn)
-        x = list(dfn['Size'])
-        y = list(dfn['Misses'])
+        x = sizes
+        y = []
+        for s in sizes:
+            basedata = pd.DataFrame(data[data["Op"] == "Base"])
+            base = basedata[(basedata['DS'] == name) & (basedata['Cache'] == cac)]
+            basemiss = statistics.mean(list(base[base['Size'] == s]['Misses']))
+            opmiss = statistics.mean(list(dfn[dfn['Size'] == s]['Misses']))
+            y.append(opmiss - basemiss)
         p = plt.plot(x, y, label=name, marker=markers[i])
         i += 1
         texts.append(plt.annotate(f'{name}', (x[-1], y[-1] ), color = p[0].get_color()))
-        
+    
     plt.yscale('log')
     plt.xscale('log')
     plt.xlabel('Initial elements and operation count')
@@ -49,7 +56,7 @@ def createplotforoperation(op, data, cac):
         mi.xy = (mi._x, mi._y)
         ma.xy = (ma._x, ma._y)
     #texts[0].set_y(texts[0].xy[1] + texts[0].xy[1] / 5)
-    plt.title(f'Count for statistics {cac} for N "{op}" operations\nRan using CPython')
+    plt.title(f'Mean count for statistics {cac} for N "{op}" operations over {len(list(dfn[dfn["Size"] == s]["Misses"]))} runs.\nRan using CPython')
     plt.legend(loc="upper left")
     plt.margins(x=0)
     plt.tight_layout()
@@ -81,6 +88,8 @@ def createplotforoperation(op, data, cac):
 if __name__ == '__main__':
     data = pd.read_csv(f"../results/cache/cache.csv")
     ops = list(pd.unique(data["Op"]))
+    ops.remove("Base")
+    sizes = sorted(list(pd.unique(data["Size"])))
     for op in ops:
         for cac in list(pd.unique(data["Cache"])):
             createplotforoperation(op, data, cac)
